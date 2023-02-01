@@ -19,6 +19,7 @@ import { UpdateProduct } from './pages/dashboard/seller/product/UpdateProduct/Up
 import { Home } from './pages/home/Home';
 import { SellerLogin } from './pages/login/SellerLogin';
 import { UserAuth } from './middleware/UserAuth';
+import { ProductDetail } from './pages/ProductDetail/ProductDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/dashboard">
           <Route path="sellers" element={<SellerProfile />} />
           <Route path="sellers/selling-product" element={<SellingProduct />} />

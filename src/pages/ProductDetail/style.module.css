@@ -1,0 +1,41 @@
+.price {
+  display: block;
+  margin-top: -5px;
+}
+
+.bgTrinary {
+  background-color: #d5d5d5;
+}
+
+.productItem {
+  border-radius: 8px;
+}
+
+.quantity svg {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galleryItems {
+  width: 65px;
+  height: 65px;
+  overflow: hidden;
+}
+
+.galleryItems img {
+  cursor: pointer;
+}
+#product .card {
+  max-width: 208px;
+  cursor: pointer;
+}
+
+@media (max-width: 765px) {
+  .productName {
+    margin-top: 10px;
+  }
+}

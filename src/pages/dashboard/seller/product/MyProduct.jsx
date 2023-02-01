@@ -13,7 +13,7 @@ export const MyProduct = () => {
   const deleteHandler = async (id) => {
     if (window.confirm(`Are you sure to delete this product?`)) {
       try {
-        const response = await axios.delete(`http://localhost:3001/api/v1/products/${id}`);
+        const response = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/products/${id}`);
         console.log(response.data);
       } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ export const MyProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/products/5db236c3-506e-4f8e-a815-f829e428d275/sellers`)
+      .get(`${process.env.REACT_APP_ENDPOINT}/products/5db236c3-506e-4f8e-a815-f829e428d275/sellers`)
       .then((res) => res.data)
       .then((res) => {
         const propAttr = res.data.map((data) => {

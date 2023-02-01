@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { AuthInputForm } from './../../components/Form/AuthInputForm';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -24,7 +23,7 @@ const CustomerRegister = () => {
     formData.append('password', password);
 
     try {
-      const registerSeller = await axios.post(`http://localhost:3001/api/v1/auth/sellers/login`, formData);
+      const registerSeller = await axios.post(`${process.env.REACT_APP_ENDPOINT}/auth/sellers/login`, formData);
       setSuccess(registerSeller.data);
 
       if (success) {
@@ -53,7 +52,5 @@ const CustomerRegister = () => {
     </Authentication>
   );
 };
-
-CustomerRegister.propTypes = {};
 
 export default CustomerRegister;

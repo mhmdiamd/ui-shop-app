@@ -29,7 +29,6 @@ export const SellingProduct = () => {
   const createHandler = async (e) => {
     const formData = new FormData();
 
-    formData.append('id_seller', '5db236c3-506e-4f8e-a815-f829e428d275');
     formData.append('id_category', 9);
     formData.append('color', size);
     formData.append('size', color);
@@ -42,7 +41,7 @@ export const SellingProduct = () => {
 
     try {
       const accessToken = localStorage.getItem('access_token').split('"')[1];
-      const productCreated = await axios.post('http://localhost:3001/api/v1/products', formData, {
+      const productCreated = await axios.post(`${process.env.REACT_APP_ENDPOINT}/products`, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

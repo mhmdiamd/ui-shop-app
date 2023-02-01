@@ -27,7 +27,7 @@ const SellerRegister = () => {
     formData.append('store_name', storeName);
 
     try {
-      const registerSeller = await axios.post(`http://localhost:3001/api/v1/auth/sellers/register`, formData);
+      const registerSeller = await axios.post(`${process.env.REACT_APP_ENDPOINT}/auth/sellers/register`, formData);
       setSuccess(registerSeller.data);
 
       if (success) {
