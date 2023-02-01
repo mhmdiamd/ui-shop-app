@@ -1,0 +1,39 @@
+.sidebar {
+  background-color: #ffffff;
+  height: 100vh;
+  margin-right: 40px;
+  position: fixed;
+}
+.menu-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.profile-setting {
+  background: #456bf3;
+}
+
+.shipping-address {
+  background: #f36f45;
+}
+
+.my-order {
+  background-color: #f3456f;
+}
+
+@media (max-width: 990px) {
+  .sidebar {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 765px) {
+  .photo-profile {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+  .sidebar-menu a {
+    justify-content: center;
+  }
+}

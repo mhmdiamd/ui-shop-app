@@ -1,0 +1,21 @@
+.input-search {
+  background-color: #f5f5f5f5 !important;
+}
+
+.search-btn-mobile {
+  width: 40px;
+  height: 40px;
+}
+.bottom-bar {
+  z-index: 999 !important;
+  position: fixed;
+  box-shadow: -3px 3px 10px black;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.bottom-bar {
+  background-color: #ffffff;
+  border-radius: 5px 5px 0 0;
+}

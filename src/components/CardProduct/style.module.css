@@ -1,0 +1,35 @@
+.card img {
+  height: 86px;
+}
+
+.cardHeight {
+  height: 245px;
+}
+.imgHeight {
+  height: 118px;
+}
+.min_width {
+  min-width: 206px;
+}
+
+@media (max-width: 765px) {
+  .cardHeight {
+    height: max-content;
+  }
+  .imgHeight {
+    height: 86px;
+  }
+}
+
+@media (max-width: 585px) {
+  .card {
+    max-width: 170px !important;
+    cursor: pointer;
+  }
+  .card {
+    border: none;
+  }
+  .card {
+    background-color: transparent;
+  }
+}
