@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { AuthInputForm } from './../../components/Form/AuthInputForm';
 import axios from 'axios';
 import Swal from 'sweetalert2';

@@ -50,7 +50,7 @@ export const SellingProduct = () => {
         navigate('/dashboard/sellers/my-product');
       }
     } catch (err) {
-      if (err.response.data.status == 403) {
+      if (err.response.data.status === 403) {
         localStorage.clear();
         navigate('/sellers/login');
       }

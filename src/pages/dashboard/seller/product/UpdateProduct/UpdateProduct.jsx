@@ -40,9 +40,9 @@ export const UpdateProduct = () => {
     }
   };
 
-  async function handleEditorReady(editor) {
-    editor.insertString('Read Here!');
-  }
+  // async function handleEditorReady(editor) {
+  //   editor.insertString('Read Here!');
+  // }
 
   function handleChange(html, text) {
     setDescription(html);

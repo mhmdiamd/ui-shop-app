@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Layout } from '../../components/Layout/Main';
-import useFetch from './../../common/useFetch';
 import style from './style.module.css';
 import { SectionContent } from './../../components/SectionContent/SectionContent';
 import { CardProduct } from './../../components/CardProduct/CardProduct';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faM, faMinus, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import photo1 from '../../assets/gallery/product1.png';
 import photo2 from '../../assets/gallery/product2.png';
 import photo3 from '../../assets/gallery/product3.png';
