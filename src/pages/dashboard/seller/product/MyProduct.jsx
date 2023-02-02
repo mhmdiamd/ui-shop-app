@@ -15,14 +15,15 @@ export const MyProduct = () => {
       try {
         const response = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/products/${id}`);
         console.log(response.data);
+        fetchData();
       } catch (err) {
         console.log(err);
       }
     }
   };
 
-  useEffect(() => {
-    axios
+  async function fetchData() {
+    await axios
       .get(`${process.env.REACT_APP_ENDPOINT}/products/5db236c3-506e-4f8e-a815-f829e428d275/sellers`)
       .then((res) => res.data)
       .then((res) => {
@@ -36,7 +37,11 @@ export const MyProduct = () => {
         setAllProducts(res.data);
         setProducts(propAttr);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response.data));
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (

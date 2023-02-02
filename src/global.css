@@ -12,7 +12,9 @@ body {
   right: 0;
   color: #9b9b9b;
 }
-
+.card-title-product {
+  font-size: 16px;
+}
 .text-trinary {
   color: transparent;
   -webkit-text-stroke: 1px #9b9b9b; /* width and color */

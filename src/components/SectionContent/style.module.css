@@ -1,0 +1,30 @@
+.sectionContent .card {
+  max-width: 208px;
+  cursor: pointer;
+}
+.productContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 765px) {
+  .sectionContent {
+    margin-top: 25px !important;
+  }
+
+  .productContent {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+  .productContent .card {
+    min-width: 150px !important;
+    min-height: 150px !important;
+  }
+
+  .sectionContent .card {
+    border: none;
+  }
+  .productContent {
+    padding-bottom: 10px;
+  }
+}

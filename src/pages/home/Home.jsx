@@ -7,10 +7,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import './style.css';
+import style from './style.module.css';
 import './my-swiper.css';
 
 import newestPhoto1 from '../../assets/img/newest/photo1.png';
+import newestPhoto2 from '../../assets/img/newest/photo2.png';
+import newestPhoto3 from '../../assets/img/newest/photoNewest3.jpg';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper';
@@ -19,6 +21,14 @@ import { SectionContent } from './../../components/SectionContent/SectionContent
 import { CardProduct } from './../../components/CardProduct/CardProduct';
 import useFetch from '../../common/useFetch';
 import { useState } from 'react';
+import hoodie from '../../assets/img/popular/hoodie.jpg';
+import hoodieBlack from '../../assets/img/popular/hoodie-black.jpg';
+import hatGray from '../../assets/img/popular/hat-gray.jpg';
+import sepatuVans from '../../assets/img/popular/spatu-vans.jpg';
+import sandalCoklat from '../../assets/img/popular/sandal-coklat.jpg';
+import whiteTshirt from '../../assets/img/popular/tshir-white.jpg';
+import accessoriesPack from '../../assets/img/popular/accessories-pack.jpg';
+import { categories } from '../../common/caegoryData';
 
 export const Home = () => {
   const { data, error, loading } = useFetch(`${process.env.REACT_APP_ENDPOINT}/products`);
@@ -47,20 +57,22 @@ export const Home = () => {
             }}
             navigation={true}
             modules={[Pagination, Navigation]}
-            className="mySwiperNewest my-4"
+            className={'mySwiperNewest my-4'}
           >
             <SwiperSlide>
               <img className="img-fluid" src={newestPhoto1} alt="" />
+              <span className="fs-2 text-light fw-bold position-absolute">Trend in 2022</span>
+            </SwiperSlide>
+            <SwiperSlide>
+              <img className="img-fluid" src={newestPhoto2} alt="" />
               <span className="fs-2 text-light fw-bold position-absolute">Black Edition</span>
             </SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
             <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
-            <SwiperSlide>Slide 7</SwiperSlide>
-            <SwiperSlide>Slide 8</SwiperSlide>
-            <SwiperSlide>Slide 9</SwiperSlide>
+            <SwiperSlide>
+              <img className="img-fluid" src={newestPhoto3} alt="" />
+              <span className="fs-2 text-light fw-bold position-absolute">Black Edition</span>
+            </SwiperSlide>
           </Swiper>
         </div>
 
@@ -93,15 +105,20 @@ export const Home = () => {
               modules={[Pagination, Navigation]}
               className="mySwiperCategories container"
             >
-              <SwiperSlide>Slide 1</SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
+              {categories.map((category) => (
+                <SwiperSlide style={{ backgroundColor: category.bgColor }}>
+                  <img class={style.categoryImage} src={category.image} alt={category.name} />
+                  <span class="fs-3 text-light fw-bold position-absolute">{category.name}</span>
+                </SwiperSlide>
+              ))}
+              {/* <SwiperSlide>Slide 2</SwiperSlide>
               <SwiperSlide>Slide 3</SwiperSlide>
               <SwiperSlide>Slide 4</SwiperSlide>
               <SwiperSlide>Slide 5</SwiperSlide>
               <SwiperSlide>Slide 6</SwiperSlide>
               <SwiperSlide>Slide 7</SwiperSlide>
               <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide>
+              <SwiperSlide>Slide 9</SwiperSlide> */}
             </Swiper>
           </SectionContent>
 
@@ -110,19 +127,19 @@ export const Home = () => {
           </SectionContent>
 
           <SectionContent title={'Popular'} description="Find clothes that are trending recently">
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Pink Hoodie - American Hoode trend', price: 75000, store_name: 'Zenith Store', photo: hoodie }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Black Hoode - Made in Bandung', price: 55000, store_name: 'Zalora cloth', photo: hoodieBlack }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Topi VARVCA - Gray variant', price: 65000, store_name: 'Zalora cloth', photo: hatGray }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Brown Slipers Slim for Man', price: 40000, store_name: 'Toko Lia', photo: sandalCoklat }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Sepatu Vans - White Variant', price: 250000, store_name: 'Vans Store Official', photo: sepatuVans }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'White Tshirt - Man Only', price: 45000, store_name: 'Rudi Store', photo: whiteTshirt }}></CardProduct>
 
-            <CardProduct data={{ id: 1, product_name: 'Baju Muslim', price: 2000, store_name: 'Zalora cloth', photo: newestPhoto1 }}></CardProduct>
+            <CardProduct data={{ id: 1, product_name: 'Accesories Pack for Women', price: 150000, store_name: 'Women Store', photo: accessoriesPack }}></CardProduct>
           </SectionContent>
         </div>
       </Layout>

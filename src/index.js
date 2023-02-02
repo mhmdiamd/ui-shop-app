@@ -29,7 +29,14 @@ root.render(
         <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/dashboard">
-          <Route path="sellers" element={<SellerProfile />} />
+          <Route
+            path="sellers"
+            element={
+              <UserAuth>
+                <SellerProfile />
+              </UserAuth>
+            }
+          />
           <Route path="sellers/selling-product" element={<SellingProduct />} />
           <Route path="sellers/my-product" element={<MyProduct />} />
           <Route path="sellers/products/:id" element={<UpdateProduct />} />
@@ -40,14 +47,7 @@ root.render(
         </Route>
         <Route path="/sellers">
           <Route path="register" element={<SellerRegister />} />
-          <Route
-            path="login"
-            element={
-              <UserAuth>
-                <SellerLogin />
-              </UserAuth>
-            }
-          />
+          <Route path="login" element={<SellerLogin />} />
         </Route>
       </Routes>
     </BrowserRouter>

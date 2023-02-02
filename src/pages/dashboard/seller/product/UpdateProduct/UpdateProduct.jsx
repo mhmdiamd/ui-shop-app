@@ -64,9 +64,7 @@ export const UpdateProduct = () => {
 
     try {
       const productUpdated = await axios.put(`${process.env.REACT_APP_ENDPOINT}/products/${id}`, formData);
-      if (product.data) {
-        navigate('/');
-      }
+      navigate('/dashboard/sellers/my-product');
       console.log(productUpdated.data);
     } catch (err) {
       console.log(err);

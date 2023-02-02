@@ -105,7 +105,6 @@ export const ProductDetail = () => {
                   <FontAwesomeIcon className="text-warning more-small-text" icon={faStar} />
                   <FontAwesomeIcon className="text-warning more-small-text" icon={faStar} />
                   <FontAwesomeIcon className="text-warning more-small-text" icon={faStar} />
-
                   <span className="color-trinary more-small-text">(10)</span>
                 </span>
 

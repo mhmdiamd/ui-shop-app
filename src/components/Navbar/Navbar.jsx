@@ -11,6 +11,7 @@ import axios from 'axios';
 
 export const Navbar = ({ searchData }) => {
   const [search, setSearch] = useState('');
+  const [user, setUser] = useState({});
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -29,89 +30,161 @@ export const Navbar = ({ searchData }) => {
   return (
     <>
       <header className="sticky-top">
-        <nav className="navbar navbar-expand-lg shadow" style={{ backgroundColor: '#fff' }}>
-          <div className="container pb-1 d-flex">
-            <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">
-              <img src={logo} alt="" className="img-fluid small-logo" />
-              <span className="text-danger fs-4 ms-2 fw-bold">Blanja</span>
-            </Link>
+        {localStorage.getItem('access_token') ? (
+          <nav className="navbar navbar-expand-lg shadow" style={{ backgroundColor: '#fff' }}>
+            <div className="container pb-1 d-flex">
+              <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">
+                <img src={logo} alt="" className="img-fluid small-logo" />
+                <span className="text-danger fs-4 ms-2 fw-bold">Blanja</span>
+              </Link>
 
-            {/* Search and Filter tablet mode */}
-            <div className="d-none d-md-flex d-lg-none ms-auto w-75 mt-2">
-              <div className="w-100 d-flex">
-                <div className="search-input position-relative w-100 d-flex">
-                  <input className="form-control me-2 rounded-pill w-100" type="text" placeholder="Search" aria-label="Search" />
-
-                  <button className="btn position-absolute search-btn me-2" type="submit">
-                    <FontAwesomeIcon className="color-trinary" icon={faMagnifyingGlass} />
-                  </button>
-                </div>
-                <div className="filter">
-                  <button className="btn border-trinary border" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <FontAwesomeIcon className="color-trinary" icon={faFilter} />
-                  </button>
-                </div>
-              </div>
-            </div>
-            {/* End Search and Filter tablet mode */}
-
-            {/* Search and Filter Mobile mode */}
-            <div className="d-sm-flex d-md-none d-lg-none ms-auto mt-2">
-              <div className="w-100">
-                <div className="search-input position-relative w-100 d-flex">
-                  <button className="btn btn-danger search-btn-mobile rounded-circle me-2" type="submit" data-bs-toggle="modal" data-bs-target="#searchModal">
-                    <FontAwesomeIcon className="text-light" icon={faMagnifyingGlass} />
-                  </button>
-                </div>
-              </div>
-            </div>
-            {/* End Search and Filter Mobile mode */}
-
-            {/* Search and Filter Desktop mode */}
-            <div className="navbar-collapse mt-2 d-none">
-              <div className="col-12 col-lg-9 d-flex">
-                <div className="input-form w-100 d-flex">
+              {/* Search and Filter tablet mode */}
+              <div className="d-none d-md-flex d-lg-none ms-auto w-75 mt-2">
+                <div className="w-100 d-flex">
                   <div className="search-input position-relative w-100 d-flex">
-                    <input className="form-control me-2 rounded-pill w-100" type="text" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                    <input className="form-control me-2 rounded-pill w-100" type="text" placeholder="Search" aria-label="Search" />
 
-                    <button className="btn position-absolute search-btn me-2 " onClick={searchSubmitHandler} type="submit">
+                    <button className="btn position-absolute search-btn me-2" type="submit">
                       <FontAwesomeIcon className="color-trinary" icon={faMagnifyingGlass} />
                     </button>
                   </div>
                   <div className="filter">
                     <button className="btn border-trinary border" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <FontAwesomeIcon className="color-trinary" icon={faFilter}></FontAwesomeIcon>
+                      <FontAwesomeIcon className="color-trinary" icon={faFilter} />
                     </button>
                   </div>
                 </div>
               </div>
+              {/* End Search and Filter tablet mode */}
+
+              {/* Search and Filter Mobile mode */}
+              <div className="d-sm-flex d-md-none d-lg-none ms-auto mt-2">
+                <div className="w-100">
+                  <div className="search-input position-relative w-100 d-flex">
+                    <button className="btn btn-danger search-btn-mobile rounded-circle me-2" type="submit" data-bs-toggle="modal" data-bs-target="#searchModal">
+                      <FontAwesomeIcon className="text-light" icon={faMagnifyingGlass} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* End Search and Filter Mobile mode */}
+
+              {/* Search and Filter Desktop mode */}
+              <div className="navbar-collapse mt-2 d-none">
+                <div className="col-12 col-lg-9 d-flex">
+                  <div className="input-form w-100 d-flex">
+                    <div className="search-input position-relative w-100 d-flex">
+                      <input className="form-control me-2 rounded-pill w-100" type="text" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+
+                      <button className="btn position-absolute search-btn me-2 " onClick={searchSubmitHandler} type="submit">
+                        <FontAwesomeIcon className="color-trinary" icon={faMagnifyingGlass} />
+                      </button>
+                    </div>
+                    <div className="filter">
+                      <button className="btn border-trinary border" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <FontAwesomeIcon className="color-trinary" icon={faFilter}></FontAwesomeIcon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* End Search and Filter Desktop mode */}
+
+              {/* Nav Menu Desktop mode */}
+              <div className="d-flex mt-2 d-md-block d-none">
+                <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
+                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                    <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
+                  </Link>
+
+                  <Link to="" className="color-trinary btn fs-5">
+                    <FontAwesomeIcon className="color-trinary" icon={faBell}></FontAwesomeIcon>
+                  </Link>
+
+                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/chat/chat.html" className="btn fs-5 color-trinary btn fs-5 color-trinary">
+                    <FontAwesomeIcon className="color-trinary" icon={faEnvelope}></FontAwesomeIcon>
+                  </Link>
+
+                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/profile/profile.html" className="profile">
+                    <img src={profile} className="img-fluid" alt="" />
+                  </Link>
+                </div>
+              </div>
+              {/* End Nav Menu Desktop mode */}
             </div>
-            {/* End Search and Filter Desktop mode */}
+          </nav>
+        ) : (
+          <nav className="navbar navbar-expand-lg shadow-sm" style={{ backgroundColor: '#fff' }}>
+            <div className="container pb-1">
+              {/* <!-- Nav Logo --> */}
+              <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">
+                <img src={logo} alt="" className="img-fluid small-logo" />
+                <span className="text-danger fs-4 ms-2 fw-bold">Blanja</span>
+              </Link>
+              {/* <!-- End Nav Logo --> */}
 
-            {/* Nav Menu Desktop mode */}
-            <div className="d-flex mt-2 d-md-block d-none">
-              <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
-                <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
-                  {/* <FontAwesomeIcon className="color-trinary" icon="fa-solid fa-cart-shopping"></FontAwesomeIcon> */}
-                  <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
+              {/* <!-- Nav Menu Mobile Mode --> */}
+              <div className="d-flex d-lg-none gap-2 align-items-center">
+                <Link to="http://127.0.0.1:5500/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                  <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
 
-                <Link to="" className="color-trinary btn fs-5">
-                  <FontAwesomeIcon className="color-trinary" icon={faBell}></FontAwesomeIcon>
+                <Link to="#" className="btn btn-login btn-danger rounded-pill btn color-trinary py-0 text-light py-1">
+                  Login
                 </Link>
 
-                <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/chat/chat.html" className="btn fs-5 color-trinary btn fs-5 color-trinary">
-                  <FontAwesomeIcon className="color-trinary" icon={faEnvelope}></FontAwesomeIcon>
-                </Link>
-
-                <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/profile/profile.html" className="profile">
-                  <img src={profile} className="img-fluid" alt="" />
+                <Link to="#" className="btn btn-signup border border-1 rounded-pill btn color-trinary py-0 color-trinary py-1">
+                  Sign up
                 </Link>
               </div>
+              {/* <!-- End Nav menu Mobile Mode --> */}
+
+              <div className="navbar-collapse mt-2">
+                {/* <!-- Search and Filtering --> */}
+                <div className="col-12 col-lg-7 d-flex mt-md-0">
+                  <div className="col-12">
+                    <div className="input-form d-flex position-relative me-2">
+                      <div className="search-input position-relative w-100 d-flex">
+                        <input className="form-control me-2 rounded-pill w-100" type="text" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+
+                        <button className="btn position-absolute search-btn me-2 " onClick={searchSubmitHandler} type="submit">
+                          <FontAwesomeIcon className="color-trinary" icon={faMagnifyingGlass} />
+                        </button>
+                      </div>
+                      <div className="filter">
+                        <button className="btn border-trinary border" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <FontAwesomeIcon className="color-trinary" icon={faFilter}></FontAwesomeIcon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-1 d-flex justify-content-end">
+                    <button className="btn border-trinary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i className="fa-solid fa-filter text-trinary"></i>
+                    </button>
+                  </div>
+                </div>
+                {/* <!-- End Search and Filtering --> */}
+
+                {/* <!-- Nav Menu Desktop Mode --> */}
+                <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
+                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                    <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
+                  </Link>
+
+                  <Link to="/customers/login" className="btn btn-login btn-danger rounded-pill btn color-trinary py-0 text-light py-1 px-3">
+                    Login
+                  </Link>
+
+                  <Link to="/customers/register" className="btn btn-signup border border-1 rounded-pill btn color-trinary py-0 color-trinary py-1 px-3">
+                    Sign up
+                  </Link>
+                </div>
+                {/* <!-- End Nav Menu Desktops Mode --> */}
+              </div>
             </div>
-            {/* End Nav Menu Desktop mode */}
-          </div>
-        </nav>
+          </nav>
+        )}
       </header>
 
       {/* Modal search */}

@@ -6,8 +6,8 @@ export const UserAuth = ({ children }) => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem('access_token');
   useEffect(() => {
-    if (accessToken) {
-      navigate('/');
+    if (!accessToken) {
+      navigate('/customers/login');
     }
   });
 

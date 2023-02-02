@@ -9,7 +9,7 @@ export const Layout = ({ children, searchData }) => {
   return (
     <>
       <Navbar searchData={(value) => searchData(value)} />
-      <main id="content" style={{ backgroundColor: `` }}>
+      <main id="content" style={{ backgroundColor: `#ffffff` }}>
         {children}
       </main>
       <BottomBar />

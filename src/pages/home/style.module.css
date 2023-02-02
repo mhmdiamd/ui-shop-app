@@ -16,6 +16,11 @@ body {
   padding: 0;
 }
 
+.categoryImage {
+  width: fit-content;
+  height: fit-content;
+}
+
 .swiper {
   width: 100%;
   height: 100%;
@@ -47,88 +52,12 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-#content {
-  position: relative;
-  height: max-content;
-  background-color: #ffffff;
-}
-
-.product-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.mySwiperCategories .swiper-slide:nth-child(1) {
-  background-color: #cc0b04;
-}
-
-.mySwiperCategories .swiper-slide:nth-child(2) {
-  background: #1c3391;
-}
-
-.mySwiperCategories .swiper-slide:nth-child(3) {
-  background: #f67b02;
-}
-
-.mySwiperCategories .swiper-slide:nth-child(4) {
-  background: #e31f51;
-}
-
-.mySwiperCategories .swiper-slide:nth-child(5) {
-  background: #57cd9e;
-}
-
-.mySwiperCategories .swiper-slide {
-  position: relative;
-}
-
-.mySwiperNewest {
-  overflow: hidden;
-}
-
-.mySwiperNewest .swiper-slide {
-  min-width: 455px;
-}
-.mySwiperNewest .swiper-slide img {
-  display: block;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.section-content .card {
-  max-width: 208px;
-  cursor: pointer;
-}
-
-.card-title-product {
-  font-size: 16px;
-}
-
-@media (max-width: 990px) {
-  .mySwiperCategories .swiper-slide {
-    height: 150px !important;
-  }
-}
-
+/* 
 @media (max-width: 765px) {
   .mySwiperNewest .swiper-slide {
     min-width: inherit;
   }
 
-  .product-content {
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-  }
-  .product-content .card {
-    min-width: 150px !important;
-    min-height: 150px !important;
-  }
-  .section-content {
-    margin-top: 25px !important;
-  }
   .mySwiperNewest .swiper-button-next,
   .mySwiperNewest .swiper-button-prev,
   .mySwiperCategories .swiper-button-next,
@@ -138,16 +67,6 @@ body {
 
   .mySwiperCategories .swiper-slide {
     height: 120px !important;
-  }
-  .section-content .card {
-    border: none;
-  }
-  .product-content {
-    padding-bottom: 10px;
-  }
-  .card {
-    position: relative;
-    z-index: 99 !important;
   }
 }
 
@@ -171,4 +90,4 @@ body {
       height: 95px !important;
     }
   }
-}
+} */
