@@ -6,175 +6,198 @@ import { DashboardCardContent } from '../../../../../components/Dashboard/Dashbo
 import { ProductImage } from '../../../../../components/Dashboard/ProductImage';
 import { Dashboard } from '../../../../../components/Layout/Dashboard';
 import './UpdateProduct.css';
+import { InputForm } from './../../../../../components/Form/InputForm';
+import { useGetCategoriesQuery } from '../../../../../features/category/categoryApi';
+import { useGetProductByIdQuery, useUpdateProductMutation } from '../../../../../features/product/productApi';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../../../features/auth/authSlice';
 
 export const UpdateProduct = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [productName, setProductName] = useState('');
-  const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
-  const [price, setPrice] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [condition, setCondition] = useState('');
-  const [description, setDescription] = useState('');
-  const [photo, setPhoto] = useState('');
+  const { data: dataProduct, error: errorProduct, isLoading: isLoadingProduct } = useGetProductByIdQuery(id);
+  const [updateProduct, { isLoading, isError, error }] = useUpdateProductMutation();
+  const { data: categories } = useGetCategoriesQuery();
+  const [product, setProduct] = useState({
+    product_name: '',
+    color: '',
+    size: '',
+    price: 0,
+    stock: 0,
+    condition: '',
+    description: '',
+    photo: '',
+    id_category: '',
+  });
 
-  const getProduct = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_ENDPOINT}/products/${id}`);
-      const product = response.data.data;
-      if (product) {
-        setProductName(product.product_name);
-        setPrice(product.price);
-        setSize(product.size);
-        setColor(product.color);
-        setStock(product.stock);
-        setCondition(product.condition);
-        setDescription(product.description);
-        setPhoto(product.photo);
-        setProduct(product);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const photoHandle = (value) => {
+    setProduct((prev) => {
+      return {
+        ...prev,
+        photo: value,
+      };
+    });
   };
 
-  // async function handleEditorReady(editor) {
-  //   editor.insertString('Read Here!');
-  // }
+  const descHandler = (html, text) => {
+    setProduct((prev) => {
+      return {
+        ...prev,
+        description: text,
+      };
+    });
+  };
 
-  function handleChange(html, text) {
-    setDescription(html);
-  }
+  const handleChange = (e) => {
+    setProduct((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
 
   const updateHandler = async (e) => {
     const formData = new FormData();
 
-    formData.append('id_seller', '5db236c3-506e-4f8e-a815-f829e428d275');
-    formData.append('id_category', 9);
-    formData.append('product_name', productName);
-    formData.append('color', size);
-    formData.append('size', color);
-    formData.append('price', price);
-    formData.append('stock', stock);
-    formData.append('condition', condition);
-    formData.append('description', description);
-    formData.append('photo', photo);
-
+    for (let attr in product) {
+      formData.append(attr, product[attr]);
+    }
+    const data = { id, body: formData };
     try {
-      const productUpdated = await axios.put(`${process.env.REACT_APP_ENDPOINT}/products/${id}`, formData);
-      navigate('/dashboard/sellers/my-product');
-      console.log(productUpdated.data);
+      const productUpdated = await updateProduct(data).unwrap();
+      if (productUpdated.message == 'Product Updated') {
+        navigate('/dashboard/sellers/my-product');
+      }
     } catch (err) {
-      console.log(err);
+      if (err.status == 401) {
+        navigate(`/customers/login`);
+        dispatch(logout());
+      }
     }
   };
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    if (!isLoadingProduct) {
+      for (let attr in product) {
+        setProduct((prev) => {
+          return {
+            ...prev,
+            [attr]: dataProduct[attr],
+          };
+        });
+      }
+    }
+  }, [isLoadingProduct]);
 
   return (
     <Dashboard>
-      <DashboardCardContent title={'Inventory'}>
-        <div className="col-12 col-md-6">
-          <label for="name-product" className="form-label color-trinary">
-            Name of goods
-          </label>
-          <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} className="form-control mb-2" id="name-product" />
-
-          <label for="name-product" className="form-label color-trinary">
-            Size
-          </label>
-          <input type="text" value={size} onChange={(e) => setSize(e.target.value)} className="form-control  mb-2" id="name-product" />
-
-          <label for="name-product" className="form-label color-trinary">
-            Color
-          </label>
-          <input type="text" value={color} onChange={(e) => setColor(e.target.value)} className="form-control" id="name-product" />
-        </div>
-      </DashboardCardContent>
-
-      <DashboardCardContent title={'Item Details'}>
-        <div className="col-12">
-          <div className="row">
-            <div className="col-12 col-md-6 me-2 mb-3">
-              <label for="name-product" className="form-label color-trinary">
-                Unit Price
-              </label>
-              <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">
-                  Rp
-                </span>
-                <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control" id="unit-price" />
-              </div>
-            </div>
-
-            <div className="col-12 col-md-6 me-1 mb-3">
-              <label for="name-product" className="form-label color-trinary">
-                Stock
-              </label>
-              <input type="number" value={stock} onChange={(e) => setStock(e.target.value)} className="form-control" id="stock" />
-            </div>
-
+      {isLoadingProduct ? (
+        'Loading....'
+      ) : (
+        <>
+          <DashboardCardContent title={'Inventory'}>
             <div className="col-12 col-md-6">
-              <label for="name-product" className="form-label color-trinary">
-                Condition
-              </label>
-              <div className="condition d-flex gap-3">
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value={'new'} onChange={(e) => setCondition(e.target.value)} checked={condition === 'new'} />
-                  <label className="form-check-label" for="flexRadioDefault1">
-                    New
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value={'secondhand'} onChange={(e) => setCondition(e.target.value)} checked={condition === 'secondhand'} />
-                  <label className="form-check-label" for="flexRadioDefault2">
-                    Secondhand
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </DashboardCardContent>
+              <InputForm type={'text'} value={product.product_name} title={'Name of goods'} name="product_name" onchange={(e) => handleChange(e)} />
 
-      <DashboardCardContent title={'Photo of Goods'}>
-        <div className="col-12 container-product-image">
-          <div className="container">
-            <div className="row main-row-photo-product rounded">
-              <div className="col-12 d-flex flex-wrap justify-content-center align-items-center">
-                <div className="row">
-                  <div className="col-12 gap-2 d-flex align-items-center flex-wrap">
-                    <ProductImage id={1} onchange={(value) => setPhoto(value)} oldPhoto={photo} />
-                    <ProductImage id={2} />
-                    <ProductImage id={3} />
-                    <ProductImage id={4} />
-                    <ProductImage id={5} />
-                    <ProductImage id={6} />
+              <InputForm type={'text'} value={product.size} title={'Size'} name="size" onchange={(e) => handleChange(e)} />
+
+              <InputForm type={'text'} value={product.color} title={'Color'} name="color" onchange={(e) => handleChange(e)} />
+
+              <label htmlFor="id_category" className="form-label color-trinary">
+                Category
+              </label>
+              <select className="form-select" name={'id_category'} aria-label="Default select example" onChange={handleChange}>
+                {categories?.map((category) => {
+                  return (
+                    <option key={category.id} value={category.id} selected={category.id === product.id_category}>
+                      {category.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </DashboardCardContent>
+
+          <DashboardCardContent title={'Item Details'}>
+            <div className="col-12">
+              <div className="row">
+                <div className="col-12 col-md-6 me-2 mb-3">
+                  <label htmlFor="name-product" className="form-label color-trinary">
+                    Unit Price
+                  </label>
+                  <div className="input-group">
+                    <span className="input-group-text" id="basic-addon1">
+                      Rp
+                    </span>
+                    <input type="number" name="price" value={product.price} onChange={handleChange} className="form-control" id="unit-price" />
+                  </div>
+                </div>
+
+                <div className="col-12 col-md-6 me-1 mb-3">
+                  <InputForm type={'number'} value={product.stock} title={'Stock'} name="stock" onchange={(e) => handleChange(e)} />
+                </div>
+
+                <div className="col-12 col-md-6">
+                  <label htmlFor="name-product" className="form-label color-trinary">
+                    Condition
+                  </label>
+                  <div className="condition d-flex gap-3">
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="condition" id="flexRadioDefault1" value={'new'} onChange={handleChange} checked={product.condition === 'new'} />
+                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                        New
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="condition" id="flexRadioDefault2" value={'secondhand'} onChange={handleChange} checked={product.condition === 'secondhand'} />
+                      <label className="form-check-label" htmlFor="flexRadioDefault2">
+                        Secondhand
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </DashboardCardContent>
+
+          <DashboardCardContent title={'Photo of Goods'}>
+            <div className="col-12 container-product-image">
+              <div className="container">
+                <div className="row main-row-photo-product rounded">
+                  <div className="col-12 d-flex flex-wrap justify-content-center align-items-center">
+                    <div className="row">
+                      <div className="col-12 gap-2 d-flex align-items-center flex-wrap">
+                        <ProductImage id={1} onchange={(value) => photoHandle(value)} oldPhoto={product.photo} />
+                        <ProductImage id={2} />
+                        <ProductImage id={3} />
+                        <ProductImage id={4} />
+                        <ProductImage id={5} />
+                        <ProductImage id={6} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </DashboardCardContent>
+
+          <DashboardCardContent title={'Description'}>
+            <div className="col-12 ">
+              <TrixEditor onChange={descHandler} />
+            </div>
+          </DashboardCardContent>
+
+          <div className="row">
+            <div className="col-12 d-flex justify-content-end pe-0">
+              <button className="btn btn-danger rounded-pill px-5" type="submit" onClick={updateHandler}>
+                Update
+              </button>
+            </div>
           </div>
-        </div>
-      </DashboardCardContent>
-
-      <DashboardCardContent title={'Description'}>
-        <div className="col-12 ">
-          <TrixEditor onChange={handleChange} onEditorReady={(e) => e.insertString(description)} />
-        </div>
-      </DashboardCardContent>
-
-      <div className="row">
-        <div className="col-12 d-flex justify-content-end pe-0">
-          <button className="btn btn-danger rounded-pill px-5" type="submit" onClick={updateHandler}>
-            Update
-          </button>
-        </div>
-      </div>
+        </>
+      )}
     </Dashboard>
   );
 };

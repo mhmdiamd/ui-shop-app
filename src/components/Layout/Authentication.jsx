@@ -36,14 +36,14 @@ export const Authentication = ({ children, title }) => {
         <div className="col-12 d-flex justify-content-center mt-4">
           <Link
             to={setLink('sellers', urlAuthStatus)}
-            className={`col-3 col-lg-2 text-center ${urlRole != 'sellers' ? 'bg-danger text-light' : ''} border border-1 text-secondary p-2 rounded-start-1 text-decoration-none border-end-0`}
+            className={`col-3 col-lg-1 text-center ${urlRole != 'sellers' ? 'bg-danger text-light' : ''} border border-1 text-secondary p-2 rounded-start-1 text-decoration-none border-end-0`}
             role="button"
           >
             Customer
           </Link>
           <Link
             to={setLink('customers', urlAuthStatus)}
-            className={`col-3 col-lg-2 p-2 text-center ${urlRole == 'sellers' ? 'bg-danger text-light' : ''} text-secondary rounded-end-1 text-decoration-none border border-1  border-start-0" role="button`}
+            className={`col-3 col-lg-1 p-2 text-center ${urlRole == 'sellers' ? 'bg-danger text-light' : ''} text-secondary rounded-end-1 text-decoration-none border border-1  border-start-0" role="button`}
           >
             Seller
           </Link>

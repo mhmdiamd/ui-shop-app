@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -19,31 +19,25 @@ import { Pagination, Navigation } from 'swiper';
 import { Layout } from '../../components/Layout/Main';
 import { SectionContent } from './../../components/SectionContent/SectionContent';
 import { CardProduct } from './../../components/CardProduct/CardProduct';
-import useFetch from '../../common/useFetch';
-import { useState } from 'react';
-import hoodie from '../../assets/img/popular/hoodie.jpg';
-import hoodieBlack from '../../assets/img/popular/hoodie-black.jpg';
-import hatGray from '../../assets/img/popular/hat-gray.jpg';
-import sepatuVans from '../../assets/img/popular/spatu-vans.jpg';
-import sandalCoklat from '../../assets/img/popular/sandal-coklat.jpg';
-import whiteTshirt from '../../assets/img/popular/tshir-white.jpg';
-import accessoriesPack from '../../assets/img/popular/accessories-pack.jpg';
-import { categories } from '../../common/caegoryData';
+import { Link } from 'react-router-dom';
+import { useGetAllProductQuery } from '../../features/product/productApi';
+import { useGetCategoriesQuery } from '../../features/category/categoryApi';
+import { faGrip } from '@fortawesome/free-solid-svg-icons';
 
 export const Home = () => {
-  const { data, error, loading } = useFetch(`${process.env.REACT_APP_ENDPOINT}/products`);
-  const [searchData, setSearchData] = useState([]);
-  const products = data.data;
+  const { data: products, isError: isErrorLoading, isLoading: isLoadingProducts } = useGetAllProductQuery();
+  const { data: categories, isError: isErrorCategories, isLoading: isLoadingCategories } = useGetCategoriesQuery();
+  const [searchData, setSearchData] = useState();
+
   return (
     <>
       <Layout searchData={setSearchData}>
-        <div className="container ">
+        <div className="container">
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
             slidesPerGroup={1}
             loop={true}
-            loopFillGroupWithBlank={true}
             pagination={{
               clickable: true,
             }}
@@ -83,7 +77,6 @@ export const Home = () => {
               spaceBetween={15}
               slidesPerGroup={3}
               loop={true}
-              loopFillGroupWithBlank={true}
               pagination={{
                 clickable: true,
               }}
@@ -105,42 +98,34 @@ export const Home = () => {
               modules={[Pagination, Navigation]}
               className="mySwiperCategories container"
             >
-              {categories.map((category) => (
-                <SwiperSlide style={{ backgroundColor: category.bgColor }}>
-                  <img class={style.categoryImage} src={category.image} alt={category.name} />
-                  <span class="fs-3 text-light fw-bold position-absolute">{category.name}</span>
+              {categories?.map((category) => (
+                <SwiperSlide key={category.id} style={{ backgroundColor: category.background_color }}>
+                  <Link to={`/products/category/${category.id}`} className={`d-flex align-items-center justify-content-center text-center w-100 h-100`}>
+                    <img className={`${style.categoryImage} img-fluid`} crossOrigin="anonymous" src={category.photo} alt={category.name} />
+                    <span className="fs-3 text-light fw-bold position-absolute">{category.name}</span>
+                  </Link>
                 </SwiperSlide>
               ))}
-              {/* <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-              <SwiperSlide>Slide 5</SwiperSlide>
-              <SwiperSlide>Slide 6</SwiperSlide>
-              <SwiperSlide>Slide 7</SwiperSlide>
-              <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide> */}
             </Swiper>
           </SectionContent>
 
-          <SectionContent title={'New'} description="You’ve never seen it before!">
-            {searchData.data ? searchData.data.map((product) => <CardProduct data={product}></CardProduct>) : products?.map((product) => <CardProduct data={product}></CardProduct>)}
-          </SectionContent>
+          {searchData ? (
+            <SectionContent title={`Search`} description="Found product what you want!">
+              {searchData?.data.map((product) => (
+                <CardProduct key={product.id} data={product}></CardProduct>
+              ))}
+            </SectionContent>
+          ) : (
+            <>
+              <SectionContent title={'New'} moreLink={'/products/type/new?page=1'} description="You’ve never seen it before!">
+                {isLoadingProducts ? 'Loading' : products?.data?.map((product) => <CardProduct key={product.id} data={product}></CardProduct>)}
+              </SectionContent>
 
-          <SectionContent title={'Popular'} description="Find clothes that are trending recently">
-            <CardProduct data={{ id: 1, product_name: 'Pink Hoodie - American Hoode trend', price: 75000, store_name: 'Zenith Store', photo: hoodie }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'Black Hoode - Made in Bandung', price: 55000, store_name: 'Zalora cloth', photo: hoodieBlack }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'Topi VARVCA - Gray variant', price: 65000, store_name: 'Zalora cloth', photo: hatGray }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'Brown Slipers Slim for Man', price: 40000, store_name: 'Toko Lia', photo: sandalCoklat }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'Sepatu Vans - White Variant', price: 250000, store_name: 'Vans Store Official', photo: sepatuVans }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'White Tshirt - Man Only', price: 45000, store_name: 'Rudi Store', photo: whiteTshirt }}></CardProduct>
-
-            <CardProduct data={{ id: 1, product_name: 'Accesories Pack for Women', price: 150000, store_name: 'Women Store', photo: accessoriesPack }}></CardProduct>
-          </SectionContent>
+              <SectionContent title={'Popular'} moreLink={'/products/type/popular?page=1'} description="Find clothes that are trending recently">
+                {isLoadingProducts ? 'Loading' : products?.data?.map((product) => <CardProduct key={product.id} data={product}></CardProduct>)}
+              </SectionContent>
+            </>
+          )}
         </div>
       </Layout>
     </>

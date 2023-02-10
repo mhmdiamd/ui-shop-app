@@ -20,37 +20,53 @@ import { Home } from './pages/home/Home';
 import { SellerLogin } from './pages/login/SellerLogin';
 import { UserAuth } from './middleware/UserAuth';
 import { ProductDetail } from './pages/ProductDetail/ProductDetail';
+import { ProductCategory } from './pages/ProductCategory/ProductCategory';
+import MyBag from './pages/MyBag/MyBag';
+import CheckOut from './pages/Checkout/Checkout';
+import { ProductType } from './pages/ProductType/ProductType';
+import { ShowCategories } from './ShowCategories';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import ShowCategories2 from './ShowCategories2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/dashboard">
-          <Route
-            path="sellers"
-            element={
-              <UserAuth>
-                <SellerProfile />
-              </UserAuth>
-            }
-          />
-          <Route path="sellers/selling-product" element={<SellingProduct />} />
-          <Route path="sellers/my-product" element={<MyProduct />} />
-          <Route path="sellers/products/:id" element={<UpdateProduct />} />
-        </Route>
-        <Route path="/customers">
-          <Route path="register" element={<CustomerRegister />} />
-          <Route path="login" element={<CustomerLogin />} />
-        </Route>
-        <Route path="/sellers">
-          <Route path="register" element={<SellerRegister />} />
-          <Route path="login" element={<SellerLogin />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/show-categories" element={<ShowCategories2 />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/home/my-bag" element={<MyBag />} />
+          <Route path="/home/checkout" element={<CheckOut />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/type/:type" element={<ProductType />} />
+          <Route path="/products/category/:id" element={<ProductCategory />} />
+          <Route path="/dashboard">
+            <Route
+              path="sellers"
+              element={
+                <UserAuth>
+                  <SellerProfile />
+                </UserAuth>
+              }
+            />
+            <Route path="sellers/selling-product" element={<SellingProduct />} />
+            <Route path="sellers/my-product" element={<MyProduct />} />
+            <Route path="sellers/products/:id" element={<UpdateProduct />} />
+          </Route>
+          <Route path="/customers">
+            <Route path="register" element={<CustomerRegister />} />
+            <Route path="login" element={<CustomerLogin />} />
+          </Route>
+          <Route path="/sellers">
+            <Route path="register" element={<SellerRegister />} />
+            <Route path="login" element={<SellerLogin />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import boxPhoto from '../../assets/box.png';
 
 export const ProductImage = ({ id, onchange, oldPhoto }) => {
-  console.log(oldPhoto);
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   function imageClickHandler(e) {

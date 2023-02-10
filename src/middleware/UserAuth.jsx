@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 export const UserAuth = ({ children }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const accessToken = localStorage.getItem('access_token');
-  useEffect(() => {
-    if (!accessToken) {
-      navigate('/customers/login');
-    }
-  });
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Navigate to="/customers/login" replace />;
+  }
 
   return <>{children}</>;
 };

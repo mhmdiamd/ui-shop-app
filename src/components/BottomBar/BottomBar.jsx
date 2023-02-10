@@ -11,7 +11,6 @@ export const BottomBar = () => {
       <div className="col-12 bottom-bar d-lg-none py-1">
         <div className="d-flex gap-2 justify-content-around align-items-center">
           <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
-            <i className="fa-solid fa-cart-shopping"></i>
             <FontAwesomeIcon icon={faShoppingCart} />
           </Link>
 

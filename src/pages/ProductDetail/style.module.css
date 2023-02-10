@@ -25,6 +25,15 @@
   height: 65px;
   overflow: hidden;
 }
+.btnSize {
+  width: 40px;
+}
+
+.btnSize:hover {
+  background-color: #dc3545;
+  border-color: transparent !important;
+  color: #ffffff;
+}
 
 .galleryItems img {
   cursor: pointer;
@@ -34,7 +43,18 @@
   cursor: pointer;
 }
 
+.colorOption:hover {
+  border: inherit !important;
+}
+
 @media (max-width: 765px) {
+  .btnSize {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
   .productName {
     margin-top: 10px;
   }

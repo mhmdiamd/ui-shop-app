@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import { SidebarMenu } from './SidebarMenu';
-import profile from '../../assets/profile/profile.png';
-import { faStore, faBox, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import profile from '../../assets/profile/photodefault.jpg';
+import { faStore, faBox, faShoppingCart, faPen, faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 export const Sidebar = () => {
+  const role = localStorage.getItem('role');
   return (
     <div className="col-md-8 col-12">
       <div className="row profile-menu">
@@ -19,7 +22,8 @@ export const Sidebar = () => {
                   <span className="fw-semibold">Jonas Adam</span>
                   <span className="color-trinary helper-text overflow-x-hidden">
                     {' '}
-                    <i className="fa-regular fa-pen-to-square me-1"></i>Ubah Profile
+                    <FontAwesomeIcon className="me-1" icon={faPen} />
+                    Ubah Profile
                   </span>
                 </div>
               </div>
@@ -29,9 +33,19 @@ export const Sidebar = () => {
       </div>
 
       <div className="row sidebar-menu gap-3 mt-5">
-        <SidebarMenu url="" icon={faStore} name={'Store'} />
-        <SidebarMenu url="" icon={faBox} name={'Product'} />
-        <SidebarMenu url="" icon={faShoppingCart} name={'Order'} />
+        {role == 'seller' ? (
+          <>
+            <SidebarMenu url="/dashboard/sellers" icon={faStore} name={'Store'} />
+            <SidebarMenu url="/dashboard/sellers/my-product" icon={faBox} name={'Product'} />
+            <SidebarMenu url="/dashboard/sellers/order" icon={faShoppingCart} name={'Order'} />
+          </>
+        ) : (
+          <>
+            <SidebarMenu url="/dashboard/customers" icon={faUser} name={'Profile'} />
+            <SidebarMenu url="/dashboard/customers/shipping-address" icon={faTruck} name={'Shipping Address'} />
+            <SidebarMenu url="/dashboard/customers/order" icon={faShoppingCart} name={'Order'} />
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png';
-import profile from '../../assets/profile/profile.png';
+import profile from '../../assets/profile/photodefault.jpg';
 import './style.css';
 import '../../global.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faShoppingCart, faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faFilter, faMagnifyingGlass, faRightFromBracket, faCaretDown, faUser, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/auth/authSlice';
+import { useUserLogoutMutation } from '../../features/auth/authApiSlice';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export const Navbar = ({ searchData }) => {
   const [search, setSearch] = useState('');
-  const [user, setUser] = useState({});
+  const [filter, setFilter] = useState({});
+  const MySwal = withReactContent(Swal);
+  const dispatch = useDispatch();
+  const [userLogout, { isLoading }] = useUserLogoutMutation();
+
+  const logoutHandler = () => {
+    userLogout();
+    if (!isLoading) {
+      dispatch(logout());
+      MySwal.fire({
+        title: <p>Logout Success!</p>,
+        icon: 'success',
+      });
+    }
+  };
+
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -19,8 +39,7 @@ export const Navbar = ({ searchData }) => {
         const response = await axios.get(`${process.env.REACT_APP_ENDPOINT}/products?search=${search}`);
         searchData(response.data);
       } else {
-        const response = await axios.get(`${process.env.REACT_APP_ENDPOINT}/products`);
-        searchData(response.data);
+        searchData(false);
       }
     } catch (err) {
       console.log(err);
@@ -30,7 +49,7 @@ export const Navbar = ({ searchData }) => {
   return (
     <>
       <header className="sticky-top">
-        {localStorage.getItem('access_token') ? (
+        {localStorage.getItem('token') ? (
           <nav className="navbar navbar-expand-lg shadow" style={{ backgroundColor: '#fff' }}>
             <div className="container pb-1 d-flex">
               <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">
@@ -93,7 +112,7 @@ export const Navbar = ({ searchData }) => {
               {/* Nav Menu Desktop mode */}
               <div className="d-flex mt-2 d-md-block d-none">
                 <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
-                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                  <Link to="/home/my-bag" className="btn fs-5 color-trinary">
                     <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
                   </Link>
 
@@ -105,9 +124,32 @@ export const Navbar = ({ searchData }) => {
                     <FontAwesomeIcon className="color-trinary" icon={faEnvelope}></FontAwesomeIcon>
                   </Link>
 
-                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/profile/profile.html" className="profile">
-                    <img src={profile} className="img-fluid" alt="" />
-                  </Link>
+                  <div className="dropdown navbar-profile profile">
+                    <div className="img-group d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src={profile} className="me-2 img-fluid rounded-circle dropdown-toggle" alt="" />
+                      <FontAwesomeIcon className="fs-4 color-trinary" icon={faCaretDown} />
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li>
+                        <Link to="#" className="dropdown-item">
+                          <FontAwesomeIcon className="me-2" icon={faUser} /> Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="#" className="dropdown-item">
+                          <FontAwesomeIcon className="me-2" icon={faTableColumns} /> Dashboard
+                        </Link>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <button className="dropdown-item" type="button" onClick={logoutHandler}>
+                          <FontAwesomeIcon className="me-2" icon={faRightFromBracket} /> Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               {/* End Nav Menu Desktop mode */}

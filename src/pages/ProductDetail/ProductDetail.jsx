@@ -12,14 +12,58 @@ import photo2 from '../../assets/gallery/product2.png';
 import photo3 from '../../assets/gallery/product3.png';
 import photo4 from '../../assets/gallery/product4.png';
 import photo5 from '../../assets/gallery/product5.png';
+import { useCreateCartMutation } from '../../features/cart/cartApi';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export const ProductDetail = () => {
+  const MySwal = withReactContent(Swal);
+
   const { id } = useParams();
+  const [createCart, { error, isLoading, isSuccess }] = useCreateCartMutation();
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [stock, setStock] = useState(1);
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
+
+  const stockIncrement = () => {
+    setStock((prev) => {
+      if (stock < product.stock) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    });
+  };
+  const stockDecrement = () => {
+    setStock((prev) => {
+      if (stock > 1) {
+        return prev - 1;
+      } else {
+        return prev;
+      }
+    });
+  };
+
+  const addToCartHandler = async () => {
+    const response = await createCart({ id_product: product.id, quantity: stock, color, size }).unwrap();
+    if (isSuccess) {
+      MySwal.fire({
+        title: <p>Product add to Cart!</p>,
+        icon: 'success',
+      });
+    }
+  };
 
   useEffect(() => {
+    if (isSuccess) {
+      MySwal.fire({
+        title: <p>Product add to Cart!</p>,
+        icon: 'success',
+      });
+    }
     setLoading(true);
     axios
       .get(`${process.env.REACT_APP_ENDPOINT}/products/${id}`)
@@ -37,7 +81,7 @@ export const ProductDetail = () => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [isSuccess]);
 
   return loading ? (
     'Loading...'
@@ -120,14 +164,14 @@ export const ProductDetail = () => {
                   <div className="col-12 mb-2">
                     <span className="fw-semibold descriptive-text">Color</span>
                   </div>
-                  <div className="col-12 d-flex gap-3">
-                    <div className="color-option color-black rounded-circle"></div>
-
-                    <div className="color-option color-red rounded-circle"></div>
-
-                    <div className="color-option color-blue rounded-circle"></div>
-
-                    <div className="color-option color-green rounded-circle"></div>
+                  <div className="col-12 d-flex gap-2">
+                    {product?.color?.split(',').map((dataColor, i) => {
+                      return (
+                        <div className={`${dataColor != color ? 'border-0' : ''} p-1 border  rounded-circle`} key={i}>
+                          <div className={`${style.colorOption} color-option rounded-circle`} style={{ backgroundColor: dataColor }} onClick={() => setColor(dataColor)}></div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 {/* <!-- End Colors --> */}
@@ -140,10 +184,12 @@ export const ProductDetail = () => {
                       <div className="col-12 mb-2">
                         <span className="fw-semibold">Size</span>
                       </div>
-                      <div className={`col-12 ${style.quantity} d-flex gap-3 align-items-center`}>
-                        <FontAwesomeIcon className={`fa-solid p-1 fa-minus border border-1 border-trinary rounded-circle ${style.bgTrinary}`} icon={faMinus} />
-                        <span className="fw-semibold">28</span>
-                        <FontAwesomeIcon className=" border p-1 border-1 border-trinary rounded-circle" icon={faPlus} />
+                      <div className={`col-12 flex-wrap ${style.quantity} d-flex gap-1 align-items-center`}>
+                        {product?.size?.split(',').map((data, i) => (
+                          <button key={i} className={`${style.btnSize} ${data == size ? 'bg-danger text-light border-danger' : ''} btn border`} name={data} onClick={(e) => setSize(e.target.name)}>
+                            {data}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -156,9 +202,11 @@ export const ProductDetail = () => {
                         <span className="fw-semibold">Jumlah</span>
                       </div>
                       <div className={`col-12 ${style.quantity} d-flex gap-3 align-items-center`}>
-                        <FontAwesomeIcon className={`fa-solid p-1 fa-minus border border-1 border-trinary rounded-circle ${style.bgTrinary}`} icon={faMinus} />
-                        <span className="fw-semibold">1</span>
-                        <FontAwesomeIcon className="border p-1 border-1 border-trinary rounded-circle" icon={faPlus} />
+                        <FontAwesomeIcon className={`fa-solid p-1 fa-minus border border-1 border-trinary rounded-circle ${style.bgTrinary}`} icon={faMinus} onClick={stockDecrement} />
+
+                        <span className="fw-semibold">{stock}</span>
+
+                        <FontAwesomeIcon className="border p-1 border-1 border-trinary rounded-circle" icon={faPlus} onClick={stockIncrement} />
                       </div>
                     </div>
                   </div>
@@ -176,7 +224,9 @@ export const ProductDetail = () => {
                             <button className="btn py-2 border border-2 border-dark text-dark w-100 rounded-pill">Chat</button>
                           </div>
                           <div className="col-6 px-1">
-                            <button className="btn py-2 border border-2 border-dark text-dark w-100 rounded-pill">Add Bag</button>
+                            <button className="btn py-2 border border-2 border-dark text-dark w-100 rounded-pill" onClick={addToCartHandler}>
+                              Add Bag
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -228,7 +278,7 @@ export const ProductDetail = () => {
                 <div className="col-12">
                   <div className="rating">
                     <span className="fs-1 fw-semibold">5.0</span>
-                    <span className="color-trinary">/10</span>
+                    <span className="color-trinary">/5</span>
                   </div>
                 </div>
                 <div className="col-12">
