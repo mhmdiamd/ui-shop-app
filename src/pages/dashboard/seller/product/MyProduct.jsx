@@ -1,19 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Dashboard } from '../../../../components/Layout/Dashboard';
 import { DashboardCardContent } from './../../../../components/Dashboard/DashboardCardContent';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDeleteProductMutation, useGetProductByIdSellerQuery } from '../../../../features/product/productApi';
-import { useSelector } from 'react-redux';
 import DataTable from 'react-data-table-component';
 
 export const MyProduct = () => {
-  const user = useSelector((state) => state.auth);
   const { data: products, isLoading, error } = useGetProductByIdSellerQuery();
   const [deleteProduct, { isLoading: isLoadingDeleteProduct, error: errorDeleteProduct }] = useDeleteProductMutation();
-  const [loading, setLoading] = useState(false);
 
   const customStyles = {
     headRow: {
@@ -101,26 +97,6 @@ export const MyProduct = () => {
         </div>
         <div className="col-12">
           <DataTable columns={columns} data={products} customStyles={customStyles} pagination highlightOnHover pointerOnHover />
-          {/* <Datatable tableHead={['Product Name', 'Stock', 'Price']} loading={isLoading}>
-            {products?.map((product, index) => {
-              return (
-                <tr key={index}>
-                  <td className="text-xs font-weight-bold">{index + 1}</td>
-                  <td className="text-xs font-weight-bold">{product.product_name}</td>
-                  <td className="text-xs font-weight-bold">{product.price}</td>
-                  <td className="text-xs font-weight-bold">{product.stock}</td>
-                  <td className="text-xs font-weight-bold d-flex gap-2">
-                    <button className="btn btn-danger" onClick={() => deleteHandler(product.id)}>
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                    <Link to={`/dashboard/sellers/products/${product.id}`} className="btn btn-success">
-                      <FontAwesomeIcon icon={faPenSquare} />
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </Datatable> */}
         </div>
       </DashboardCardContent>
     </Dashboard>

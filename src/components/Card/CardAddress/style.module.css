@@ -1,3 +1,9 @@
 .boderTrinary {
   border: 1px solid #dfdfdf;
 }
+
+.closeIcon {
+  right: 8px;
+  top: 8px;
+  cursor: pointer;
+}

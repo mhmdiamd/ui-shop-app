@@ -42,7 +42,6 @@ const ModalChangeAddress = ({ data }) => {
           title: <p>Success Update Shipping address!</p>,
           icon: 'success',
         });
-        window.location.reload();
       }
     } catch (err) {
       console.log(err);
@@ -76,32 +75,32 @@ const ModalChangeAddress = ({ data }) => {
               ) : (
                 <div className="col-12">
                   <div className="row">
-                    <div className="col-12 px-0">
-                      <InputForm title={'Save address as (ex : home address, office address)'} name="as_address" value={shippingAddress.as_address} onchange={changeHandler} />
+                    <div className="col-12">
+                      <InputForm type={'text'} title={'Save address as (ex : home address, office address)'} name="as_address" value={shippingAddress.as_address} onchange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 ps-0">
-                      <InputForm title={'Recipient’s name'} name="recipent_name" value={shippingAddress.recipent_name} onchange={changeHandler} />
+                    <div className="col-12 col-md-6 mt-md-1">
+                      <InputForm type={'text'} title={'Recipient’s name'} name="recipent_name" value={shippingAddress.recipent_name} onchange={changeHandler} />
+                    </div>
+
+                    <div className="col-12 col-md-6 mt-md-1">
+                      <InputForm type={'text'} title={'Recipient’s phone'} name="recipent_phone" value={shippingAddress.recipent_phone} onchange={changeHandler} />
+                    </div>
+
+                    <div className="col-12 col-md-6 mt-md-1">
+                      <InputForm type={'text'} title={'Address'} name="address" value={shippingAddress.address} onchange={changeHandler} />
                     </div>
 
                     <div className="col-12 col-md-6 mt-md-1 pe-0">
-                      <InputForm title={'Recipient’s phone'} name="recipent_phone" value={shippingAddress.recipent_phone} onchange={changeHandler} />
+                      <InputForm type={'number'} title={'Postal code'} name="postal_code" value={shippingAddress.postal_code} onchange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 px-0">
-                      <InputForm title={'Address'} name="address" value={shippingAddress.address} onchange={changeHandler} />
-                    </div>
-
-                    <div className="col-12 col-md-6 mt-md-1 pe-0">
-                      <InputForm title={'Postal code'} name="postal_code" value={shippingAddress.postal_code} onchange={changeHandler} />
-                    </div>
-
-                    <div className="col-12 col-md-6 mt-md-1 px-0">
+                    <div className="col-12 col-md-6 mt-md-1">
                       <InputForm title={'City or Subdistrict'} name="city_or_subdistrict" value={shippingAddress.city_or_subdistrict} onchange={changeHandler} />
                     </div>
 
-                    <div className="col-12 px-0 mt-4">
-                      <input className="form-check-input border-2 me-3" type="checkbox" value="" id="flexCheckDefault" checked={shippingAddress.status == 1} onChange={changeHandler} />
+                    <div className="col-12 mt-4">
+                      <input className="form-check-input border-2 me-3" type="checkbox" value={shippingAddress.status} name="status" checked={shippingAddress.status == 1} id="flexCheckDefault" onChange={changeHandler} />
                       <span className="color-trinary helper-text">Make it the primary address</span>
                     </div>
                   </div>
@@ -115,7 +114,7 @@ const ModalChangeAddress = ({ data }) => {
                           </button>
                         </div>
                         <div className="col-6 pe-0 ps-1">
-                          <button className="btn btn-danger text-light w-100 rounded-pill" onClick={saveHandler}>
+                          <button className="btn btn-danger text-light w-100 rounded-pill" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onClick={saveHandler}>
                             Save
                           </button>
                         </div>

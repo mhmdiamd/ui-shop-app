@@ -24,10 +24,11 @@ import { ProductCategory } from './pages/ProductCategory/ProductCategory';
 import MyBag from './pages/MyBag/MyBag';
 import CheckOut from './pages/Checkout/Checkout';
 import { ProductType } from './pages/ProductType/ProductType';
-import { ShowCategories } from './ShowCategories';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import ShowCategories2 from './ShowCategories2';
+import { CustomerProfile } from './pages/dashboard/customer/profile/Profile';
+import CustomerShippingAddress from './pages/dashboard/customer/address/CustomerShippingAddress';
+import CustomerOrder from './pages/dashboard/customer/order/CustomerOrder';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,7 +37,6 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/show-categories" element={<ShowCategories2 />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/my-bag" element={<MyBag />} />
           <Route path="/home/checkout" element={<CheckOut />} />
@@ -55,6 +55,18 @@ root.render(
             <Route path="sellers/selling-product" element={<SellingProduct />} />
             <Route path="sellers/my-product" element={<MyProduct />} />
             <Route path="sellers/products/:id" element={<UpdateProduct />} />
+          </Route>
+          <Route path="/dashboard">
+            <Route
+              path="customers"
+              element={
+                <UserAuth>
+                  <CustomerProfile />
+                </UserAuth>
+              }
+            />
+            <Route path="customers/shipping-address" element={<CustomerShippingAddress />} />
+            <Route path="customers/order" element={<CustomerOrder />} />
           </Route>
           <Route path="/customers">
             <Route path="register" element={<CustomerRegister />} />

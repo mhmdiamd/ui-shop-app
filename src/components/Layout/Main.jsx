@@ -10,7 +10,7 @@ export const Layout = ({ children, searchData }) => {
       <main id="content" style={{ backgroundColor: `#ffffff` }}>
         {children}
       </main>
-      <BottomBar />
+      <BottomBar /> 
     </>
   );
 };

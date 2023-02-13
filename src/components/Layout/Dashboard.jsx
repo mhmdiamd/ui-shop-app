@@ -4,7 +4,7 @@ import { Navbar } from '../Navbar/Navbar';
 import { Sidebar } from '../Sidebar/Sidebar';
 import './style.css';
 
-export const Dashboard = ({ children }) => {
+export const Dashboard = ({ children, user }) => {
   return (
     <>
       <Navbar />
@@ -12,7 +12,7 @@ export const Dashboard = ({ children }) => {
         <div className="row">
           <div className="col-2 col-md-4 col-lg-3 sidebar pt-5 min-h-100">
             <div className="row d-flex justify-content-end row-content">
-              <Sidebar />
+              <Sidebar user={user} />
             </div>
           </div>
           <div className="col-10 pe-4 offset-2 ps-1 offset-md-4 offset-lg-3 col-md-8 col-lg-9 pt-5">

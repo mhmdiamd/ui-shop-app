@@ -8,19 +8,14 @@ import { Link } from 'react-router-dom';
 const MyBag = () => {
   const { data: carts, isLoading, error, isError } = useGetCartByIdCustomerQuery();
   const [deleteCartByIdCustomer, { isLoading: isLoadingIdCustomer, error: errorIdCustomer }] = useDeleteCartByIdCustomerMutation();
-  const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(false);
   const [deleteCheck, setDeleteCheck] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    setPrice(0);
-    if (!isLoading && !error) {
-      carts.forEach((cart) => setPrice((prev) => (prev += cart.price * cart.quantity)));
-    }
 
     setLoading(loading);
-  }, [isLoading]);
+  }, [isLoading, carts]);
 
   return (
     <Layout>
@@ -57,7 +52,7 @@ const MyBag = () => {
 
                 {/* <!-- Items --> */}
                 <div className="col-12 mt-4 bag-product">
-                  {carts?.map((cart) => (
+                  {carts?.data?.map((cart) => (
                     <CardListCart checked={deleteCheck} key={cart.id} data={cart} />
                   ))}
                 </div>
@@ -73,17 +68,17 @@ const MyBag = () => {
               </div>
               <div className="total-price">
                 <div className="row my-4">
-                  <div className="col-8">
+                  <div className="col-6">
                     <span className="color-trinary">Total price</span>
                   </div>
-                  <div className="col-4">
-                    <span className="fw-bold d-block text-end">Rp. {loading ? '' : price}</span>
+                  <div className="col-6">
+                    <span className="fw-bold d-block text-end">Rp. {carts?.totalPrice}</span>
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-12">
-                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/checkout/checkout.html" className={`${isError ? 'd-none' : ''} btn rounded-pill w-100 bg-danger text-light`}>
+                  <Link to="/home/checkout" className={`${isError ? 'd-none' : ''} btn rounded-pill w-100 bg-danger text-light`}>
                     Buy
                   </Link>
                 </div>

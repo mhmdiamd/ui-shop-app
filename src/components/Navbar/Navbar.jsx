@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png';
 import profile from '../../assets/profile/photodefault.jpg';
@@ -8,18 +8,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingCart, faFilter, faMagnifyingGlass, faRightFromBracket, faCaretDown, faUser, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../features/auth/authSlice';
-import { useUserLogoutMutation } from '../../features/auth/authApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, setCredentials } from '../../features/auth/authSlice';
+import { useFindMeQuery, useUserLogoutMutation } from '../../features/auth/authApiSlice';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
 
 export const Navbar = ({ searchData }) => {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState({});
   const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
+
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState({});
+
   const [userLogout, { isLoading }] = useUserLogoutMutation();
+  const { data, isLoading: isLoadingUserAuth } = useFindMeQuery();
+  const { data: carts } = useGetCartByIdCustomerQuery();
+
+  const userAuth = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (!userAuth?.role && localStorage.getItem('token')) {
+      dispatch(setCredentials({ user: data, token: localStorage.getItem('token') }));
+    }
+  }, []);
 
   const logoutHandler = () => {
     userLogout();
@@ -112,8 +125,9 @@ export const Navbar = ({ searchData }) => {
               {/* Nav Menu Desktop mode */}
               <div className="d-flex mt-2 d-md-block d-none">
                 <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
-                  <Link to="/home/my-bag" className="btn fs-5 color-trinary">
+                  <Link to="/home/my-bag" className="btn fs-5 color-trinary position-relative">
                     <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
+                    {carts?.data?.length && <span className={`cart-length position-absolute bg-danger text-light`}>{carts?.data?.length}</span>}
                   </Link>
 
                   <Link to="" className="color-trinary btn fs-5">
@@ -131,15 +145,18 @@ export const Navbar = ({ searchData }) => {
                     </div>
                     <ul className="dropdown-menu dropdown-menu-end">
                       <li>
-                        <Link to="#" className="dropdown-item">
+                        <Link to={`/dashboard/${userAuth?.role}s`} className="dropdown-item">
                           <FontAwesomeIcon className="me-2" icon={faUser} /> Profile
                         </Link>
                       </li>
-                      <li>
-                        <Link to="#" className="dropdown-item">
-                          <FontAwesomeIcon className="me-2" icon={faTableColumns} /> Dashboard
-                        </Link>
-                      </li>
+                      {userAuth?.role == 'seller' && (
+                        <li>
+                          <Link to={`/dashboard/sellers/my-product`} className="dropdown-item">
+                            <FontAwesomeIcon className="me-2" icon={faTableColumns} /> Dashboard
+                          </Link>
+                        </li>
+                      )}
+
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -171,11 +188,11 @@ export const Navbar = ({ searchData }) => {
                   <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
 
-                <Link to="#" className="btn btn-login btn-danger rounded-pill btn color-trinary py-0 text-light py-1">
+                <Link to="/customers/login" className="btn btn-login btn-danger rounded-pill btn color-trinary py-0 text-light py-1">
                   Login
                 </Link>
 
-                <Link to="#" className="btn btn-signup border border-1 rounded-pill btn color-trinary py-0 color-trinary py-1">
+                <Link to="/customers/register" className="btn btn-signup border border-1 rounded-pill btn color-trinary py-0 color-trinary py-1">
                   Sign up
                 </Link>
               </div>

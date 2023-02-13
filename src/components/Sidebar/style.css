@@ -5,8 +5,12 @@
   position: fixed;
 }
 .menu-logo {
-  width: 32px;
-  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+} 
+
+.normal-position {
+  position: inherit !important;
 }
 
 .profile-setting {
@@ -15,6 +19,10 @@
 
 .shipping-address {
   background: #f36f45;
+}
+
+.menu-container {
+  background-color: #ffffff;
 }
 
 .my-order {

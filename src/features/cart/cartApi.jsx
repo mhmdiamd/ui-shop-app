@@ -1,6 +1,8 @@
 import { apiSlice } from '../../app/api/authApi';
 
 export const cartApi = apiSlice.injectEndpoints({
+  // tagTypes: ['Cart'],
+
   endpoints: (builder) => ({
     getAllCart: builder.query({
       query: () => 'carts',
@@ -9,9 +11,16 @@ export const cartApi = apiSlice.injectEndpoints({
     }),
     getCartByIdCustomer: builder.query({
       query: (id) => `carts/${id}/customers`,
-      transformResponse: (response, meta, args) => response.data,
-      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Cart', data }))] : ['Cart']),
+      transformResponse: (response, meta, args) => {
+        let price = 0;
+        response?.data?.map((cart) => (price += Number(cart.price * cart.quantity)));
+        return { ...response, totalPrice: price };
+      },
+      providesTags: (result, error, arg) => {
+        return result ? [...result.data.map((data) => ({ type: 'Cart', data }))] : ['Cart'];
+      },
     }),
+
     createCart: builder.mutation({
       query: (data) => {
         return {
@@ -20,12 +29,12 @@ export const cartApi = apiSlice.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ['Cart'],
     }),
 
     // Update cart by id
     updateCart: builder.mutation({
       query: (data) => {
-        console.log(data);
         return {
           url: `carts/${data.id}`,
           method: 'PUT',

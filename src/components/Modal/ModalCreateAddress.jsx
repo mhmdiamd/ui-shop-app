@@ -79,49 +79,49 @@ const ModalCreateAddress = ({ children }) => {
 
                 <div className="col-12">
                   <div className="row">
-                    <div className="col-12 px-0">
+                    <div className="col-12 ">
                       <label htmlFor="inputPlace5" className="form-label color-trinary helper-text">
                         Save address as (ex : home address, office address)
                       </label>
                       <input type="text" id="inputPlace5" name="as_address" value={data.as_address} onChange={changeHandler} className="form-control" aria-describedby="PlaceHelpBlock" />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 ps-0">
+                    <div className="col-12 col-md-6 mt-md-1 ">
                       <label htmlFor="inputPlace6" className="form-label color-trinary helper-text">
                         Recipient’s name
                       </label>
                       <input type="text" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="recipent_name" value={data.recipent_name} onChange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 pe-0">
+                    <div className="col-12 col-md-6 mt-md-1 ">
                       <label htmlFor="inputPlace6" className="form-label color-trinary helper-text">
                         Recipient's telephone number
                       </label>
                       <input type="text" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="recipent_phone" value={data.recipent_phone} onChange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 px-0">
+                    <div className="col-12 col-md-6 mt-md-1">
                       <label htmlFor="inputPlace6" className="form-label color-trinary helper-text">
                         Address
                       </label>
                       <input type="text" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="address" value={data.address} onChange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 pe-0">
+                    <div className="col-12 col-md-6 mt-md-1 ">
                       <label htmlFor="inputPlace6" className="form-label color-trinary helper-text">
                         Postal code
                       </label>
-                      <input type="text" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="postal_code" value={data.postal_code} onChange={changeHandler} />
+                      <input type="number" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="postal_code" value={data.postal_code} onChange={changeHandler} />
                     </div>
 
-                    <div className="col-12 col-md-6 mt-md-1 px-0">
+                    <div className="col-12 col-md-6 mt-md-1 ">
                       <label htmlFor="inputPlace6" className="form-label color-trinary helper-text">
                         City or Subdistrict
                       </label>
                       <input type="text" id="inputPlace6" className="form-control" aria-describedby="PlaceHelpBlock" name="city_or_subdistrict" value={data.city_or_subdistrict} onChange={changeHandler} />
                     </div>
 
-                    <div className="col-12 px-0 mt-4">
+                    <div className="col-12  mt-4">
                       <input className="form-check-input border-2 me-3" name="status" type="checkbox" value={data.status} id="flexCheckDefault" onChange={changeHandler} />
                       <span className="color-trinary helper-text">Make it the primary address</span>
                     </div>

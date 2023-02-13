@@ -10,7 +10,6 @@ export const authSlice = createSlice({
     setCredentials: (state, action) => {
       const { user, token } = action.payload;
       localStorage.setItem('token', token);
-      localStorage.setItem('role', user.role);
       state.user = user;
       state.token = token;
     },

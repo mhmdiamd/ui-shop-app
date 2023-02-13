@@ -1,0 +1,66 @@
+main {
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #ffffff;
+  height: 100vh;
+}
+
+.row-content {
+  width: fit-content;
+}
+
+.menu-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.profile-setting {
+  background: #456bf3;
+}
+
+.shipping-address {
+  background: #f36f45;
+}
+
+.my-order {
+  background-color: #f3456f;
+}
+
+.change-photo {
+  height: max-content;
+}
+
+.main-photo {
+  max-width: 111px;
+  max-height: 111px;
+}
+
+.input-photo {
+  opacity: 0;
+}
+
+.product .items {
+  box-shadow: 0px 0px 8px rgba(115, 115, 115, 0.25);
+  border-radius: 4px;
+}
+
+.bg-trinary {
+  background-color: #d5d5d5;
+}
+
+.product-item {
+  border-radius: 8px;
+}
+
+.add-address {
+  cursor: pointer;
+  border: 2px dashed #dee2e6;
+}
+
+.add-address span {
+  letter-spacing: 0.8px;
+}

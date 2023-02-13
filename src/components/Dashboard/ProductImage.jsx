@@ -34,7 +34,7 @@ export const ProductImage = ({ id, onchange, oldPhoto }) => {
 
   return (
     <div className={`item ${id === 1 ? 'first-item' : ''}  d-flex mx-auto justify-content-center align-items-center mb-2`} onClick={imageClickHandler} id="thumbnail">
-      <img crossOrigin="anonymous" src={preview ? preview : oldPhoto ? oldPhoto : boxPhoto} alt="" className="img-fluid" />
+      <img src={preview ? preview : oldPhoto ? oldPhoto : boxPhoto} alt="" className="img-fluid" />
 
       <input type="file" className="d-none" name="photo1" onChange={selectFile} id={`photo${id}`} />
     </div>

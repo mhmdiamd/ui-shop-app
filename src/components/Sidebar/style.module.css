@@ -1,0 +1,10 @@
+.mainMenu {
+  z-index: 999;
+  background-color: white;
+}
+
+.childMenu {
+  /* transform: translateY(-100%); */
+  transition: 1s ease;
+  position: absolute;
+}

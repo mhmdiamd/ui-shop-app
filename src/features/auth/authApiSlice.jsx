@@ -6,7 +6,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/me',
       }),
-      transformResponse: (response, meta, args) => response.data,
+      transformResponse: function (response, meta, args) {
+        return response.data;
+      },
     }),
     sellerRegister: builder.mutation({
       query: (data) => {

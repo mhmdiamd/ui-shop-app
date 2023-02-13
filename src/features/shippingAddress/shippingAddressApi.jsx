@@ -1,6 +1,8 @@
 import { apiSlice } from '../../app/api/authApi';
 
 export const shippingAddressApi = apiSlice.injectEndpoints({
+  tagTypes: ['ShippingAddress'],
+
   endpoints: (builder) => ({
     // Get All Product
     // getAllProduct: builder.query({
@@ -22,7 +24,7 @@ export const shippingAddressApi = apiSlice.injectEndpoints({
         const primaryAddress = response?.data?.filter((data) => data.status == 1);
         return { ...response, primaryAddress: primaryAddress[0] };
       },
-      providesTags: (result, error, arg) => (result ? [...result.data.map((data) => ({ type: 'Product', data }))] : ['ShippingAddress']),
+      providesTags: (result, error, arg) => (result ? [...result.data.map((data) => ({ type: 'ShippingAddress', data }))] : ['ShippingAddress']),
     }),
 
     // Update shipping address by id
@@ -35,10 +37,10 @@ export const shippingAddressApi = apiSlice.injectEndpoints({
           body,
         };
       },
-      invalidatesTags: ['ShippingAddress'],
       transformResponse: (response, meta, arg) => {
         return response.data;
       },
+      invalidatesTags: ['ShippingAddress'],
     }),
 
     // Add ShippingAddress
@@ -54,20 +56,20 @@ export const shippingAddressApi = apiSlice.injectEndpoints({
       invalidatesTags: ['ShippingAddress'],
     }),
 
-    // // Delete Product
-    // deleteProduct: builder.mutation({
-    //   query: (id) => ({
-    //     url: `products/${id}`,
-    //     method: 'DELETE',
-    //   }),
-    //   transformResponse: (response, meta, arg) => {
-    //     return response.data;
-    //   },
-    //   invalidatesTags: ['Product'],
-    // }),
+    // Delete Product
+    deleteShippingAddressById: builder.mutation({
+      query: (id) => ({
+        url: `shipping-address/${id}`,
+        method: 'DELETE',
+      }),
+      transformResponse: (response, meta, arg) => {
+        return response.data;
+      },
+      invalidatesTags: ['ShippingAddress'],
+    }),
 
     // Update Shipping Address By Id
   }),
 });
 
-export const { useGetShippingAddressByIdCustomerQuery, useCreateShippingAddressCustomerMutation, useUpdateShippingAddressByIdMutation } = shippingAddressApi;
+export const { useGetShippingAddressByIdCustomerQuery, useCreateShippingAddressCustomerMutation, useUpdateShippingAddressByIdMutation, useDeleteShippingAddressByIdMutation } = shippingAddressApi;

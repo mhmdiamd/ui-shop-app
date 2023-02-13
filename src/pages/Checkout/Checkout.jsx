@@ -6,9 +6,11 @@ import { useGetShippingAddressByIdCustomerQuery } from '../../features/shippingA
 import CardAddress from '../../components/Card/CardAddress/CardAddress';
 import ModalChangeAddress from './../../components/Modal/ModalChangeAddress';
 import ModalCreateAddress from './../../components/Modal/ModalCreateAddress';
+import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
 
 const CheckOut = () => {
   const { data: shippingAddress, isLoading: isLoadingShippingAddress, error: errorShippingAddress } = useGetShippingAddressByIdCustomerQuery();
+  const { data: carts, isLoading, error, isError } = useGetCartByIdCustomerQuery();
 
   return (
     <Layout>
@@ -31,10 +33,10 @@ const CheckOut = () => {
                   'Loading...'
                 ) : (
                   <>
-                    <span className="fw-semibold">{shippingAddress.primaryAddress.recipent_name}</span>
+                    <span className="fw-semibold">{shippingAddress?.primaryAddress?.recipent_name}</span>
                     <p className="helper-text mt-2">
-                      {shippingAddress.primaryAddress.address}
-                      {shippingAddress.primaryAddress.city_or_subdistrict} - {shippingAddress.primaryAddress.postal_code}
+                      {shippingAddress?.primaryAddress?.address}
+                      {shippingAddress?.primaryAddress?.city_or_subdistrict} - {shippingAddress?.primaryAddress?.postal_code}
                     </p>
 
                     <button className="btn border color-trinary border-1 rounded-pill" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
@@ -47,10 +49,7 @@ const CheckOut = () => {
             {/* <!-- End Main Address --> */}
 
             {/* <!-- Items --> */}
-            <div className="col-12 mt-4 bag-product">
-              <CardCheckout data={{ name: 'Jas Blizer', store_name: 'Zalora cloth', price: 200000, img: photo }} />
-              <CardCheckout data={{ name: 'Jas Blizer', store_name: 'Zalora cloth', price: 200000, img: photo }} />
-            </div>
+            <div className="col-12 mt-4 bag-product">{isLoading ? 'Loading....' : carts?.data?.map((cart) => <CardCheckout key={cart.id} data={cart} />)}</div>
             {/* <!-- End Items --> */}
           </div>
 
@@ -61,33 +60,38 @@ const CheckOut = () => {
               </div>
 
               {/* <!-- List Price --> */}
-              <div className="total-price border-2 border-bottom">
-                <div className="row mt-4">
-                  <div className="col-8">
-                    <span className="color-trinary">Order</span>
+              {isLoading ? (
+                'Loading...'
+              ) : (
+                <div className="total-price border-2 border-bottom">
+                  <div className="row mt-4">
+                    <div className="col-6">
+                      <span className="color-trinary">Order</span>
+                    </div>
+                    <div className="col-6">
+                      <span className="fw-bold d-block text-end">Rp. {carts?.totalPrice}</span>
+                    </div>
                   </div>
-                  <div className="col-4">
-                    <span className="fw-bold d-block text-end">$ 40.0</span>
+                  <div className="row mb-3">
+                    <div className="col-6">
+                      <span className="color-trinary">Delivery</span>
+                    </div>
+                    <div className="col-6">
+                      <span className="fw-bold d-block text-end">Rp 5000</span>
+                    </div>
                   </div>
                 </div>
-                <div className="row mb-3">
-                  <div className="col-8">
-                    <span className="color-trinary">Delivery</span>
-                  </div>
-                  <div className="col-4">
-                    <span className="fw-bold d-block text-end">$ 5.0</span>
-                  </div>
-                </div>
-              </div>
+              )}
+
               {/* <!-- End List price --> */}
 
               {/* <!-- Shopping Summary --> */}
-              <div className="row my-3">
-                <div className="col-8">
+              <div className="row my-3 ">
+                <div className="col-6">
                   <span className="fw-semibold">Shopping summary</span>
                 </div>
-                <div className="col-4">
-                  <span className="fw-bold d-block text-end text-danger">$ 45.0</span>
+                <div className="col-6">
+                  <span className="fw-bold d-block text-end text-danger">Rp. {carts?.totalPrice - 5000}</span>
                 </div>
               </div>
               {/* <!-- Shopping Summary --> */}
