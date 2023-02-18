@@ -20,7 +20,7 @@ export const ProductDetail = () => {
   const MySwal = withReactContent(Swal);
 
   const { id } = useParams();
-  const [createCart, { error, isLoading, isSuccess }] = useCreateCartMutation();
+  const [createCart, {}] = useCreateCartMutation();
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
