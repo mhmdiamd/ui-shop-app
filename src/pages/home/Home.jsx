@@ -22,7 +22,6 @@ import { CardProduct } from './../../components/CardProduct/CardProduct';
 import { Link } from 'react-router-dom';
 import { useGetAllProductQuery } from '../../features/product/productApi';
 import { useGetCategoriesQuery } from '../../features/category/categoryApi';
-import { faGrip } from '@fortawesome/free-solid-svg-icons';
 
 export const Home = () => {
   const { data: products, isError: isErrorLoading, isLoading: isLoadingProducts } = useGetAllProductQuery();

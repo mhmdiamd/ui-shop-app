@@ -7,10 +7,20 @@ import CardAddress from '../../components/Card/CardAddress/CardAddress';
 import ModalChangeAddress from './../../components/Modal/ModalChangeAddress';
 import ModalCreateAddress from './../../components/Modal/ModalCreateAddress';
 import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
+import { useCreateOrderMutation } from '../../features/order/orderApi';
 
 const CheckOut = () => {
   const { data: shippingAddress, isLoading: isLoadingShippingAddress, error: errorShippingAddress } = useGetShippingAddressByIdCustomerQuery();
   const { data: carts, isLoading, error, isError } = useGetCartByIdCustomerQuery();
+  const [createOrder, { isLoading: isLoadingCreateOrder, error: errorCreateOrder }] = useCreateOrderMutation();
+
+  const createOrderHandler = () => {
+    return new Promise.all([
+      carts?.data?.map(async (cart) => {
+        await createOrder({ id_product: cart.id_product, id_customer: cart.id_customer, quantity: cart.quantity, price: carts.totalPrice - 5000, id_shipping_address: shippingAddress.primaryAddress.id });
+      }),
+    ]);
+  };
 
   return (
     <Layout>
@@ -217,7 +227,7 @@ const CheckOut = () => {
                 <span className="fw-semibold d-block text-danger">$ 45.0</span>
               </div>
               <div className="col-6 d-flex align-items-center justify-content-end">
-                <button type="button" className="btn h-75 pt-0 btn-danger w-100 rounded-pill text-light">
+                <button onClick={createOrderHandler} type="button" className="btn h-75 pt-0 btn-danger w-100 rounded-pill text-light">
                   Apply
                 </button>
               </div>

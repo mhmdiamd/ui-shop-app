@@ -14,19 +14,19 @@ import { useFindMeQuery, useUserLogoutMutation } from '../../features/auth/authA
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 export const Navbar = ({ searchData }) => {
   const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
+  const userAuth = useSelector((state) => state.auth.user);
 
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({});
 
-  const [userLogout, { isLoading }] = useUserLogoutMutation();
-  const { data, isLoading: isLoadingUserAuth } = useFindMeQuery();
-  const { data: carts } = useGetCartByIdCustomerQuery();
-
-  const userAuth = useSelector((state) => state.auth.user);
+  const [userLogout] = useUserLogoutMutation();
+  const { data } = useFindMeQuery();
+  const { data: carts, isLoading } = useGetCartByIdCustomerQuery(userAuth?.role == 'customer' || data?.role == 'customer' ? 'undefined' : skipToken);
 
   useEffect(() => {
     if (!userAuth?.role && localStorage.getItem('token')) {
@@ -42,6 +42,7 @@ export const Navbar = ({ searchData }) => {
         title: <p>Logout Success!</p>,
         icon: 'success',
       });
+      window.location.replace('/customers/login');
     }
   };
 

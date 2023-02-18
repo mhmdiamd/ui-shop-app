@@ -97,12 +97,12 @@ export const SidebarMenu = ({ url, icon, name, user }) => {
             </span>
           </div>
 
-          <Link to="" className={`${style.childMenu} order-child-menu d-none d-md-flex text-decoration-none text-dark d-flex gap-3 align-items-center`}>
+          <Link to="/dashboard/sellers/my-order" className={`${style.childMenu} order-child-menu d-none d-md-flex text-decoration-none text-dark d-flex gap-3 align-items-center`}>
             <span className={`menu-logo d-flex align-items-center justify-content-center rounded-circle`}></span>
             <span className="menu-name helper-text color-trinary d-none d-md-flex">My Order</span>
           </Link>
 
-          <Link to="" className={`${style.childMenu} order-child-menu d-none d-md-flex text-decoration-none text-dark d-flex gap-3 align-items-center`}>
+          <Link to="/dashboard/sellers/order-cancel" className={`${style.childMenu} order-child-menu d-none d-md-flex text-decoration-none text-dark d-flex gap-3 align-items-center`}>
             <span className={`menu-logo d-flex align-items-center justify-content-center rounded-circle`}></span>
             <span className="menu-name helper-text color-trinary d-none d-md-flex">Order Cancel</span>
           </Link>

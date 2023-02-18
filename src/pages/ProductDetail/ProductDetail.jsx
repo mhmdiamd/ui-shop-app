@@ -15,7 +15,6 @@ import photo5 from '../../assets/gallery/product5.png';
 import { useCreateCartMutation } from '../../features/cart/cartApi';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { PulseLoader } from 'react-spinners';
 
 export const ProductDetail = () => {
   const MySwal = withReactContent(Swal);
@@ -52,7 +51,7 @@ export const ProductDetail = () => {
     try {
       await createCart({ id_product: product.id, quantity: stock, color, size }).unwrap();
       MySwal.fire({
-        title: <p>Product add to Cart!</p>,
+        title: <p>Recipe success Created!</p>,
         icon: 'success',
       });
     } catch (err) {

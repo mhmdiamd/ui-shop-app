@@ -29,6 +29,8 @@ import { store } from './app/store';
 import { CustomerProfile } from './pages/dashboard/customer/profile/Profile';
 import CustomerShippingAddress from './pages/dashboard/customer/address/CustomerShippingAddress';
 import CustomerOrder from './pages/dashboard/customer/order/CustomerOrder';
+import SellerOrder from './pages/dashboard/seller/order/MyOrder/MyOrder';
+import SellerOrderCancel from './pages/dashboard/seller/order/OrderCancel/OrderCancel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -55,6 +57,8 @@ root.render(
             <Route path="sellers/selling-product" element={<SellingProduct />} />
             <Route path="sellers/my-product" element={<MyProduct />} />
             <Route path="sellers/products/:id" element={<UpdateProduct />} />
+            <Route path="sellers/my-order" element={<SellerOrder />} />
+            <Route path="sellers/order-cancel" element={<SellerOrderCancel />} />
           </Route>
           <Route path="/dashboard">
             <Route

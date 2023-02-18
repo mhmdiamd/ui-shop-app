@@ -1,6 +1,7 @@
 import { apiSlice } from '../../app/api/authApi';
 
 export const productApi = apiSlice.injectEndpoints({
+  tagTypes: ['Product'],
   endpoints: (builder) => ({
     // Get All Product
     getAllProduct: builder.query({
@@ -21,11 +22,14 @@ export const productApi = apiSlice.injectEndpoints({
       transformResponse: (response, meta, arg) => {
         return response.data;
       },
+      providesTags: ['Product'],
+      // (result, error, arg) => (result ? [...result.data.map((data) => ({ type: 'Product', data }))] : ['Product']),
     }),
 
     // Get Product By Id Seller
     getProductByIdSeller: builder.query({
       query: (id) => `products/${id}/sellers`,
+
       transformResponse: (response, meta, arg) => response.data,
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Product', data }))] : ['Product']),
     }),

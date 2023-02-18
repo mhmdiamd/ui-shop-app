@@ -55,6 +55,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/auth/logout',
         method: 'POST',
       }),
+      invalidatesTags: ['Cart'],
       transformResponse: (response, meta, args) => response,
     }),
   }),
