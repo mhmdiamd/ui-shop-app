@@ -15,13 +15,9 @@ export const SellerLogin = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
 
     try {
       const userData = await sellerLogin({ email, password }).unwrap();
-      console.log(userData);
       dispatch(setCredentials({ user: userData.data, token: userData.token }));
       navigate('/');
     } catch (err) {
@@ -35,7 +31,6 @@ export const SellerLogin = () => {
     }
   }, []);
 
-  console.log(error);
 
   return (
     <Authentication title={'Please Sign up with your account!'}>

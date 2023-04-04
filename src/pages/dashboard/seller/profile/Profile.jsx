@@ -7,6 +7,7 @@ import axios from 'axios';
 import profile from '../../../../assets/profile/photodefault.jpg';
 import { ProductImage } from './../../../../components/Dashboard/ProductImage';
 import { useFindMeQuery } from '../../../../features/auth/authApiSlice';
+import { useUpdateSellerMutation } from '../../../../features/seller/sellerApi';
 
 export const SellerProfile = () => {
   const [data, setData] = useState({});
@@ -14,6 +15,7 @@ export const SellerProfile = () => {
   const [preview, setPreview] = useState();
   const [loading, setLoading] = useState(false);
   const { data: products, isLoading, isError } = useFindMeQuery();
+  const [updateSeller] = useUpdateSellerMutation()
 
   function imageClickHandler(e) {
     const inputImg = document.querySelector(`#profile`);
@@ -62,15 +64,9 @@ export const SellerProfile = () => {
     for (let attr in data) {
       formData.append(attr, data[attr]);
     }
-    try {
-      const update = await axios.put(`${process.env.REACT_APP_ENDPOINT}/sellers/${data.id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
+
+    await updateSeller({id: data.id, data: formData})
+  
   };
 
   useEffect(() => {
@@ -103,11 +99,11 @@ export const SellerProfile = () => {
           <div className="col-12 px-0 pb-4">
             <div className="row d-flex mt-4">
               <div className="col-12 ps-4 col-lg-8 order-2 order-lg-1 d-flex flex-column gap-4">
-                <InputFormProfile type="text" name={'name'} value={data.name} title="Name" onchange={(e) => changeHandler(e)} />
+                <InputFormProfile type="text" name={'name'} value={data?.name} title="Name" onchange={(e) => changeHandler(e)} />
 
-                <InputFormProfile type="text" name={'store_name'} value={data.store_name} title="Store Name" onchange={(e) => changeHandler(e)} />
+                <InputFormProfile type="text" name={'store_name'} value={data?.store_name} title="Store Name" onchange={(e) => changeHandler(e)} />
 
-                <InputFormProfile type="text" name={'email'} value={data.email} title="Email" onchange={(e) => changeHandler(e)} />
+                <InputFormProfile type="text" name={'email'} value={data?.email} title="Email" onchange={(e) => changeHandler(e)} />
 
                 <div className="row">
                   <div className="col-12 col-lg-4 d-flex align-items-center">
@@ -156,7 +152,7 @@ export const SellerProfile = () => {
                     <div className="row">
                       <div className="col-12 d-flex justify-content-center">
                         <div className="main-photo">
-                          <img src={preview ? preview : data.photo == 'photodefault.jpg' ? profile : data.photo} crossOrigin={'anonymous'} className="img-fluid rounded-pill" alt="" />
+                          <img src={preview ? preview : data?.photo == 'photodefault.jpg' ? profile : data?.photo} className="img-fluid rounded-pill" alt="" />
                         </div>
                       </div>
                       <div className="col-12 d-flex justify-content-center mt-3">

@@ -25,7 +25,10 @@ export const Sidebar = ({ user }) => {
         <div className="col-12 ">
           <div className="row">
             <div className="col-12 col-md-4">
-              <img className="img-fluid d-block rounded-circle photo-profile mx-auto" crossOrigin="anonymous" src={userAuth?.photo == 'photodefault.jpg' ? profile : userAuth?.photo} alt="" />
+              {userAuth ? 
+                <img className="img-fluid d-block rounded-circle photo-profile mx-auto" src={userAuth?.photo == 'photodefault.jpg' ? profile : userAuth?.photo} alt="" /> 
+                : 'Loading....'
+              }
             </div>
             <div className="col-8 d-none d-md-block">
               <div className="row">

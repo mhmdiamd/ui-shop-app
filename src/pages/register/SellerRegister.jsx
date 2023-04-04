@@ -4,50 +4,56 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Authentication } from '../../components/Layout/Authentication';
+import { useSellerRegisterMutation } from '../../features/auth/authApiSlice';
+import { useEffect } from 'react';
+import { closeLoading, showLoading, successLoading } from '../../common/loadingHandler';
 
 const SellerRegister = () => {
-  const MySwal = withReactContent(Swal);
+  const [sellerRegister, {isLoading, isSuccess, isError}] = useSellerRegisterMutation()
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    store_name: ""
+  })
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [storeName, setStoreName] = useState('');
-  const [error, setError] = useState(undefined);
-  const [success, setSuccess] = useState({});
+  const changeHandler = (e) => {
+    setData(prev => {
+      return {
+        ...prev,
+        [e.target.name] : e.target.value
+      }
+    })
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('phone', phone);
-    formData.append('store_name', storeName);
-
-    try {
-      const registerSeller = await axios.post(`${process.env.REACT_APP_ENDPOINT}/auth/sellers/register`, formData);
-      setSuccess(registerSeller.data);
-
-      if (success) {
-        MySwal.fire({
-          title: <p>Register Success, Check your Email for activate!</p>,
-          icon: 'success',
-        });
-      }
-    } catch (err) {
-      setError(err);
-      console.log(err);
-    }
+    await sellerRegister(data)
   };
+
+  useEffect(() => {
+    if(isLoading) showLoading('Please Wait...')
+    if(isSuccess) {
+      setData({
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        store_name: ""
+      })
+      successLoading('Register Success, Check your Email for activate!')
+    }
+    if(isError) closeLoading('Register Failed')
+  }, [isSuccess, isError, isLoading])
 
   return (
     <Authentication title={'Please Sign up with your account!'}>
-      <AuthInputForm type={'text'} onchange={(value) => setName(value)} name={'name'} placeholder={'Name'} required={true} />
-      <AuthInputForm type={'email'} onchange={(value) => setEmail(value)} name={'email'} placeholder={'Email'} required={true} />
-      <AuthInputForm type={'password'} onchange={(value) => setPassword(value)} name={'password'} placeholder={'******'} required={true} />
-      <AuthInputForm type={'number'} onchange={(value) => setPhone(value)} name={'phono'} placeholder={'Phone Number'} required={true} />
-      <AuthInputForm type={'text'} onchange={(value) => setStoreName(value)} name={'store_name'} placeholder={'Store Name'} required={true} />
+      <AuthInputForm type={'text'} onchange={(e) => changeHandler(e)} name={'name'} placeholder={'Name'} required={true} />
+      <AuthInputForm type={'email'} onchange={(e) => changeHandler(e)} name={'email'} placeholder={'Email'} required={true} />
+      <AuthInputForm type={'password'} onchange={(e) => changeHandler(e)} name={'password'} placeholder={'******'} required={true} />
+      <AuthInputForm type={'number'} onchange={(e) => changeHandler(e)} name={'phone'} placeholder={'Phone Number'} required={true} />
+      <AuthInputForm type={'text'} onchange={(e) => changeHandler(e)} name={'store_name'} placeholder={'Store Name'} required={true} />
 
       <div className="input-group mb-3">
         <button className="w-100 btn btn-danger rounded-pill mt-3" onClick={submitHandler} type="submit">

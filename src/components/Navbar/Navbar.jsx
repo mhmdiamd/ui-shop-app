@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../assets/logo/logo.png';
-import profile from '../../assets/profile/photodefault.jpg';
-import './style.css';
-import '../../global.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faShoppingCart, faFilter, faMagnifyingGlass, faRightFromBracket, faCaretDown, faUser, faTableColumns } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, setCredentials } from '../../features/auth/authSlice';
-import { useFindMeQuery, useUserLogoutMutation } from '../../features/auth/authApiSlice';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/logo/logo.png";
+import profile from "../../assets/profile/photodefault.jpg";
+import "./style.css";
+import "../../global.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell, faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingCart, faFilter, faMagnifyingGlass, faRightFromBracket, faCaretDown, faUser, faTableColumns } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, setCredentials } from "../../features/auth/authSlice";
+import { useFindMeQuery, useUserLogoutMutation } from "../../features/auth/authApiSlice";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useGetCartByIdCustomerQuery } from "../../features/cart/cartApi";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 export const Navbar = ({ searchData }) => {
   const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const userAuth = useSelector((state) => state.auth.user);
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [filter, setFilter] = useState({});
 
   const [userLogout] = useUserLogoutMutation();
   const { data } = useFindMeQuery();
-  const { data: carts, isLoading } = useGetCartByIdCustomerQuery(userAuth?.role == 'customer' || data?.role == 'customer' ? 'undefined' : skipToken);
+  const { data: carts, isLoading } = useGetCartByIdCustomerQuery(userAuth?.role == "customer" || data?.role == "customer" ? "undefined" : skipToken);
 
   useEffect(() => {
-    if (!userAuth?.role && localStorage.getItem('token')) {
-      dispatch(setCredentials({ user: data, token: localStorage.getItem('token') }));
+    if (!userAuth?.role && localStorage.getItem("token")) {
+      dispatch(setCredentials({ user: data, token: localStorage.getItem("token") }));
     }
   }, []);
 
@@ -40,9 +40,9 @@ export const Navbar = ({ searchData }) => {
       dispatch(logout());
       MySwal.fire({
         title: <p>Logout Success!</p>,
-        icon: 'success',
+        icon: "success",
       });
-      window.location.replace('/customers/login');
+      window.location.replace("/customers/login");
     }
   };
 
@@ -63,8 +63,8 @@ export const Navbar = ({ searchData }) => {
   return (
     <>
       <header className="sticky-top">
-        {localStorage.getItem('token') ? (
-          <nav className="navbar navbar-expand-lg shadow" style={{ backgroundColor: '#fff' }}>
+        {localStorage.getItem("token") ? (
+          <nav className="navbar navbar-expand-lg shadow" style={{ backgroundColor: "#fff" }}>
             <div className="container pb-1 d-flex">
               <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">
                 <img src={logo} alt="" className="img-fluid small-logo" />
@@ -141,7 +141,10 @@ export const Navbar = ({ searchData }) => {
 
                   <div className="dropdown navbar-profile profile">
                     <div className="img-group d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src={profile} className="me-2 img-fluid rounded-circle dropdown-toggle" alt="" />
+                      {userAuth && (
+                        console.log(userAuth),
+                        <img src={userAuth.photo == 'photodefault.jpg' ? profile : userAuth.photo} className="me-2 img-fluid rounded-circle dropdown-toggle" alt="" />
+                      )}
                       <FontAwesomeIcon className="fs-4 color-trinary" icon={faCaretDown} />
                     </div>
                     <ul className="dropdown-menu dropdown-menu-end">
@@ -150,7 +153,7 @@ export const Navbar = ({ searchData }) => {
                           <FontAwesomeIcon className="me-2" icon={faUser} /> Profile
                         </Link>
                       </li>
-                      {userAuth?.role == 'seller' && (
+                      {userAuth?.role == "seller" && (
                         <li>
                           <Link to={`/dashboard/sellers/my-product`} className="dropdown-item">
                             <FontAwesomeIcon className="me-2" icon={faTableColumns} /> Dashboard
@@ -174,7 +177,7 @@ export const Navbar = ({ searchData }) => {
             </div>
           </nav>
         ) : (
-          <nav className="navbar navbar-expand-lg shadow-sm" style={{ backgroundColor: '#fff' }}>
+          <nav className="navbar navbar-expand-lg shadow-sm" style={{ backgroundColor: "#fff" }}>
             <div className="container pb-1">
               {/* <!-- Nav Logo --> */}
               <Link className="navbar-brand d-flex align-items-center me-4 btn fs-5 color-trinary" to="/">

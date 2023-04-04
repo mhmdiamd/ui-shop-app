@@ -11,3 +11,5 @@ const customerApi = apiSlice.injectEndpoints({
     })
   })
 })
+
+export const { useUpdateCustomerMutation } = customerApi

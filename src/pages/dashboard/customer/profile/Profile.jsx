@@ -6,12 +6,16 @@ import InputFormProfile from '../../../../components/Form/InputFormProfile';
 import axios from 'axios';
 import profile from '../../../../assets/profile/photodefault.jpg';
 import { useFindMeQuery } from '../../../../features/auth/authApiSlice';
+import { useUpdateCustomerMutation } from '../../../../features/customer/customerApi';
 
 export const CustomerProfile = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    gender: "man"
+  });
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const { data: user, isLoading } = useFindMeQuery();
+  const [updateCustomer] = useUpdateCustomerMutation()
 
   function imageClickHandler(e) {
     const inputImg = document.querySelector(`#profile`);
@@ -60,15 +64,8 @@ export const CustomerProfile = () => {
     for (let attr in data) {
       formData.append(attr, data[attr]);
     }
-    try {
-      const update = await axios.put(`${process.env.REACT_APP_ENDPOINT}/sellers/${data.id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    
+    await updateCustomer({id: data.id, data: formData})
   };
 
   useEffect(() => {
@@ -155,7 +152,7 @@ export const CustomerProfile = () => {
                     <div className="row">
                       <div className="col-12 d-flex justify-content-center">
                         <div className="main-photo">
-                          <img src={preview ? preview : data.photo == 'photodefault.jpg' ? profile : data.photo} crossOrigin={'anonymous'} className="img-fluid rounded-pill" alt="" />
+                          <img src={preview ? preview : data.photo == 'photodefault.jpg' ? profile : data.photo} className="img-fluid rounded-pill" alt="" />
                         </div>
                       </div>
                       <div className="col-12 d-flex justify-content-center mt-3">

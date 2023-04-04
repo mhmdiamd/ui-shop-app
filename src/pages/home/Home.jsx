@@ -100,7 +100,7 @@ export const Home = () => {
               {categories?.map((category) => (
                 <SwiperSlide key={category.id} style={{ backgroundColor: category.background_color }}>
                   <Link to={`/products/category/${category.id}`} className={`d-flex align-items-center justify-content-center text-center w-100 h-100`}>
-                    <img className={`${style.categoryImage} img-fluid`} crossOrigin="anonymous" src={category.photo} alt={category.name} />
+                    <img className={`${style.categoryImage} img-fluid`} src={category.photo} alt={category.name} />
                     <span className="fs-3 text-light fw-bold position-absolute">{category.name}</span>
                   </Link>
                 </SwiperSlide>
