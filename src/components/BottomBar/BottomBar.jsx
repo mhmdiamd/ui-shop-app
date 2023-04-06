@@ -19,11 +19,11 @@ export const BottomBar = () => {
               <FontAwesomeIcon icon={faBell} />
             </Link>
 
-            <Link to="home/message" className="btn fs-5 color-trinary">
+            <Link to="/home/message" className="btn fs-5 color-trinary">
               <FontAwesomeIcon icon={faEnvelope} />
             </Link>
 
-            <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/profile/profile.html" className="profile">
+            <Link to="/Pages/profile/profile.html" className="profile">
               <img src={profile} className="img-fluid" alt="" />
             </Link>
           </div>

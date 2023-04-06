@@ -138,7 +138,7 @@ export const Navbar = ({ searchData }) => {
                     <FontAwesomeIcon className="color-trinary" icon={faBell}></FontAwesomeIcon>
                   </Link>
 
-                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/chat/chat.html" className="btn fs-5 color-trinary btn fs-5 color-trinary">
+                  <Link to="/chat" className="btn fs-5 color-trinary btn fs-5 color-trinary">
                     <FontAwesomeIcon className="color-trinary" icon={faEnvelope}></FontAwesomeIcon>
                   </Link>
 
@@ -188,7 +188,7 @@ export const Navbar = ({ searchData }) => {
 
               {/* <!-- Nav Menu Mobile Mode --> */}
               <div className="d-flex d-lg-none gap-2 align-items-center">
-                <Link to="http://127.0.0.1:5500/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                <Link to="/home/my-bag" className="btn fs-5 color-trinary">
                   <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
 
@@ -231,7 +231,7 @@ export const Navbar = ({ searchData }) => {
 
                 {/* <!-- Nav Menu Desktop Mode --> */}
                 <div className="d-lg-flex d-none gap-3 ms-auto align-items-center">
-                  <Link to="https://prototype-shop-app-pijarcamp.vercel.app/Pages/my-bag/my-bag.html" className="btn fs-5 color-trinary">
+                  <Link to="/home/my-bag" className="btn fs-5 color-trinary">
                     <FontAwesomeIcon className="color-trinary" icon={faShoppingCart}></FontAwesomeIcon>
                   </Link>
 
