@@ -28,6 +28,9 @@ export const Navbar = ({ searchData }) => {
   const { data } = useFindMeQuery();
   const { data: carts, isLoading } = useGetCartByIdCustomerQuery(userAuth?.role == "customer" || data?.role == "customer" ? "undefined" : skipToken);
 
+  console.log(userAuth)
+
+
   useEffect(() => {
     if (!userAuth?.role && localStorage.getItem("token")) {
       dispatch(setCredentials({ user: data, token: localStorage.getItem("token") }));
@@ -141,10 +144,7 @@ export const Navbar = ({ searchData }) => {
 
                   <div className="dropdown navbar-profile profile">
                     <div className="img-group d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                      {userAuth && (
-                        console.log(userAuth),
-                        <img src={userAuth.photo == 'photodefault.jpg' ? profile : userAuth.photo} className="me-2 img-fluid rounded-circle dropdown-toggle" alt="" />
-                      )}
+                      <img src={userAuth?.photo} className="me-2 img-fluid rounded-circle dropdown-toggle" alt="" />
                       <FontAwesomeIcon className="fs-4 color-trinary" icon={faCaretDown} />
                     </div>
                     <ul className="dropdown-menu dropdown-menu-end">
