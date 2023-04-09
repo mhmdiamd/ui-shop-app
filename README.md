@@ -62,7 +62,7 @@ git clone https://github.com/mhmdiamd/ui-shop-app
 - Go To Folder Repo
 
 ```
-cd ui-tiket-app
+cd ui-shop-app
 ```
 
 - Install Module
@@ -72,7 +72,7 @@ npm install
 ```
 
 - <a href="#setup-env">Setup .env</a>
-- Type ` npm run dev` To Start Website
+- Type ` npm run start` To Start Website
 - Type ` npm run production` To Start Production
 
 ### Setup .env
