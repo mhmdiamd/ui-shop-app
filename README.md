@@ -23,9 +23,10 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
 - [Contributing](#contributing)
 - [Related Project](#related-project)
-- [Screenshots](#screenshots)
+- [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -169,6 +170,7 @@ REACT_APP_ENDPOINT = [BACKEND_URL]
     <td>Seller Add Product</td>
     <td>Home Mobile Version</td>
   </tr>
+</table>
 <!-- CONTRIBUTING -->
 
 ## Contributing
