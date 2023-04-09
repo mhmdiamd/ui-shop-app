@@ -1,13 +1,15 @@
 import React from 'react';
 import CardCheckout from '../../components/CardCheckout/CardCheckout';
 import { Layout } from '../../components/Layout/Main';
-import photo from '../../assets/img/popular/hat-gray.jpg';
 import { useGetShippingAddressByIdCustomerQuery } from '../../features/shippingAddress/shippingAddressApi';
 import CardAddress from '../../components/Card/CardAddress/CardAddress';
 import ModalChangeAddress from './../../components/Modal/ModalChangeAddress';
 import ModalCreateAddress from './../../components/Modal/ModalCreateAddress';
 import { useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
 import { useCreateOrderMutation } from '../../features/order/orderApi';
+import gopayPng from '../../assets/payment/gopay.png'
+import mCardPng from '../../assets/payment/mastercard.png'
+import posPng from '../../assets/payment/pos.png'
 
 const CheckOut = () => {
   const { data: shippingAddress, isLoading: isLoadingShippingAddress, error: errorShippingAddress } = useGetShippingAddressByIdCustomerQuery();
@@ -151,7 +153,7 @@ const CheckOut = () => {
                     <div className="col-12">
                       <div className="row payment-method mb-4">
                         <div className="col-3">
-                          <img src="../../Assets/image/payment/gopay.png" className="img-fluid" alt="" />
+                          <img src={gopayPng} className="img-fluid" alt="" />
                         </div>
                         <div className="col-8">
                           <span className="fw-semibold">Gopay</span>
@@ -163,7 +165,7 @@ const CheckOut = () => {
 
                       <div className="row payment-method mb-4">
                         <div className="col-3">
-                          <img src="../../Assets/image/payment/pos.png" className="img-fluid" alt="" />
+                          <img src={posPng} className="img-fluid" alt="" />
                         </div>
                         <div className="col-8">
                           <span className="fw-semibold">Pos Indonesia</span>
@@ -175,7 +177,7 @@ const CheckOut = () => {
 
                       <div className="row payment-method mb-4">
                         <div className="col-3">
-                          <img src="../../Assets/image/payment/mastercard.png" className="img-fluid" alt="" />
+                          <img src={mCardPng} className="img-fluid" alt="" />
                         </div>
                         <div className="col-8">
                           <span className="fw-semibold">Mastercard</span>
@@ -203,7 +205,7 @@ const CheckOut = () => {
                           <span className="color-trinary">Order</span>
                         </div>
                         <div className="col-4">
-                          <span className="fw-bold d-block text-end">$ 40.0</span>
+                          <span className="fw-bold d-block text-end">Rp. 590000</span>
                         </div>
                       </div>
                       <div className="row">
@@ -211,7 +213,7 @@ const CheckOut = () => {
                           <span className="color-trinary">Delivery</span>
                         </div>
                         <div className="col-4">
-                          <span className="fw-bold d-block text-end">$ 5.0</span>
+                          <span className="fw-bold d-block text-end">Rp. 5000</span>
                         </div>
                       </div>
                     </div>
@@ -224,7 +226,7 @@ const CheckOut = () => {
             <div className="row px-4 pb-3 shadow">
               <div className="col-6">
                 <span className="fw-semibold d-block">Shopping summary</span>
-                <span className="fw-semibold d-block text-danger">$ 45.0</span>
+                <span className="fw-semibold d-block text-danger">Rp. 585000</span>
               </div>
               <div className="col-6 d-flex align-items-center justify-content-end">
                 <button onClick={createOrderHandler} type="button" className="btn h-75 pt-0 btn-danger w-100 rounded-pill text-light">

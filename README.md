@@ -1,70 +1,195 @@
-# Getting Started with Create React App
+<p align="center">
+<div align="center">
+  <img height="150" src="./src/assets/logo/logo.png" alt="blanja-logo" border="0"/>
+</div>
+  <h3 align="center">Blanja App</h3>
+  <p align="center">
+    <a href="https://github.com/mhmdiamd/ui-shop-app"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://ui-shop-app.vercel.app/">View Demo</a>
+    <br />
+    <a href="https://kind-blue-angelfish-boot.cyclic.app/api/v1">Api Demo</a>
+  </p>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- TABLE OF CONTENTS -->
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
+- [Contact](#contact)
 
-### `npm start`
+<!-- ABOUT THE PROJECT -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About The Project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Blanja is an E-commerce website project that aims to provide an easy and convenient online shopping experience for users in Indonesia. The site offers a wide range of products, including fashion, beauty, electronics, and food and beverages.
 
-### `npm test`
+To use Blanja's services, users only need to create an account and enter their payment details. After that, users can browse products, add them to their shopping cart, and choose their preferred payment method.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+With all the features and security provided, Blanja is expected to provide a safe, easy, and convenient online shopping experience for users across Indonesia.
 
-### `npm run build`
+<!-- GETTING STARTED -->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This is an example of how to list things you need to use the software and how to install them.
 
-### `npm run eject`
+- [nodejs](https://nodejs.org/en/download/)
+- [Bootstrap Css](https://getbootstrap.com/)
+- [React JS](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Clone This Front End Repo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+git clone https://github.com/mhmdiamd/ui-shop-app
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Go To Folder Repo
 
-## Learn More
+```
+cd ui-tiket-app
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Install Module
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm install
+```
 
-### Code Splitting
+- <a href="#setup-env">Setup .env</a>
+- Type ` npm run dev` To Start Website
+- Type ` npm run production` To Start Production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Setup .env
 
-### Analyzing the Bundle Size
+Create .env file in your root project folder.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+REACT_APP_ENDPOINT = [BACKEND_URL]
+```
 
-### Making a Progressive Web App
+<!-- ROADMAP -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Screenshots
 
-### Advanced Configuration
+<table>
+ <tr>
+    <td><img width="350px" src="./documentation/seller-register.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./documentation/customer-register.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Seller Register</td>
+    <td>Customer Register</td>
+  </tr>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  <tr>
+    <td><img width="350px" src="./documentation/login.png"  border="0" border="0" alt="3" /> </td>
+     <td><img width="350px" src="./documentation/home.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+   <tr>
+    <td>Login</td>
+    <td>Home</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./documentation/search-result.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/product-base-on-category.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+   <tr>
+    <td>Search Result</td>
+    <td>Product base on Category</td>
+  </tr>
+    <tr>
+    <td><img width="350px" src="./documentation/my-bag.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/checkout.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+   <tr>
+    <td>My Bag</td>
+    <td>Checkout</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./documentation/select-payment.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/choose-address.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+  <tr>
+    <td>Select Payment</td>
+    <td>Select Address</td>
+  </tr>
 
-### Deployment
+  <tr>
+    <td><img width="350px" src="./documentation/customer-profile.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/customer-shipping-address.png"  border="0" border="0" alt="3" /> </td>
+  </tr>
+   <tr>
+    <td>Customer Profile</td>
+    <td>customer shipping address</td>
+  </tr>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  <tr>
+    <td><img width="350px" src="./documentation/customer-order.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/seller-profile.png"  border="0" border="0" alt="3" /> </td>
+  </tr>
+   <tr>
+    <td>Customer Order</td>
+    <td>Seller Profile</td>
+  </tr>
 
-### `npm run build` fails to minify
+  <tr>
+    <td><img width="350px" src="./documentation/my-product-seller.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/my-order-seller.png"  border="0" border="0" alt="3" /> </td>
+  </tr>
+   <tr>
+    <td>Seller My Product</td>
+    <td>Seller My Order</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./documentation/filter.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/home-mobile.png"  border="0" border="0" alt="3" /> </td>
+  </tr>
+   <tr>
+    <td>Filter</td>
+    <td>Home Mobile Version</td>
+  </tr>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
+  <tr>
+    <td><img width="350px" src="./documentation/seller-create-product.png"  border="0" border="0" alt="3" /> </td>
+  </tr>
+  <tr>
+    <td>Seller Add Product</td>
+  </tr>
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Related Project
+
+:rocket: [`Backend Blanja`](https://github.com/mhmdiamd/be-shop-app)
+
+:rocket: [`Frontend Blanja`](https://github.com/mhmdiamd/ui-shop-app)
+
+:rocket: [`Demo Blanja`](https://ui-shop-app.vercel.app/)
+
+Project Link: [https://github.com/mhmdiamd/ui-shop-app](https://github.com/mhmdiamd/ui-shop-app)

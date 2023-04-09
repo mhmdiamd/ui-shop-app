@@ -22,13 +22,10 @@ export const Navbar = ({ searchData }) => {
   const userAuth = useSelector((state) => state.auth.user);
 
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState({});
 
   const [userLogout] = useUserLogoutMutation();
   const { data } = useFindMeQuery();
   const { data: carts, isLoading } = useGetCartByIdCustomerQuery(userAuth?.role == "customer" || data?.role == "customer" ? "undefined" : skipToken);
-
-  console.log(userAuth)
 
 
   useEffect(() => {
