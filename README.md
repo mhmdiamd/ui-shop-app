@@ -32,7 +32,7 @@
 
 ## About The Project
 
-Blanja is an E-commerce website project that aims to provide an easy and convenient online shopping experience for users in Indonesia. The site offers a wide range of products, including fashion, beauty, electronics, and food and beverages.
+Blanja is an E-commerce website project that aims to provide an easy and convenient online shopping experience for users in Indonesia. The site offers a wide range of products, including fashion, beauty, electronics, food and beverages.
 
 To use Blanja's services, users only need to create an account and enter their payment details. After that, users can browse products, add them to their shopping cart, and choose their preferred payment method.
 
@@ -185,7 +185,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Blanja`](https://github.com/mhmdiamd/be-shop-app)
+:rocket: [`Backend Blanja`](https://github.com/mhmdiamd/restapi-shop-app)
 
 :rocket: [`Frontend Blanja`](https://github.com/mhmdiamd/ui-shop-app)
 

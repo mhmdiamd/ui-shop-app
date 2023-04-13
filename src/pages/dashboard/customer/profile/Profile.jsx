@@ -108,7 +108,7 @@ export const CustomerProfile = () => {
                       <span className="input-group-text" id="basic-addon1">
                         +62
                       </span>
-                      <input type="number" name={'phone'} value={data?.phone?.slice(1, 14)} className="form-control" aria-describedby="phoneHelp" />
+                      <input type="number" name={'phone'} value={data?.phone?.slice(1, 14)} className="form-control" aria-describedby="phoneHelp" onChange={changeHandler}/>
                     </div>
                   </div>
                 </div>
