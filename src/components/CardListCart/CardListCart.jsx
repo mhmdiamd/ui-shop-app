@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDeleteCartByIdMutation, useUpdateCartMutation } from '../../features/cart/cartApi';
 import style from './style.module.css';
 import Swal from 'sweetalert2';
+import { convert } from 'rupiah-format'
 
 const CardListCart = ({ data, checked }) => {
   const [updateCart, { isLoading, error }] = useUpdateCartMutation();
@@ -73,7 +74,7 @@ const CardListCart = ({ data, checked }) => {
               <FontAwesomeIcon onClick={() => incrementQuantity(data)} className={`border border-1 border-trinary rounded-circle ${style.faIcon}`} icon={faPlus} />
             </div>
             <div className="col-6 price justify-content-end d-flex align-items-center">
-              <span className="fw-semibold">Rp. {data.quantity * data.price}</span>
+              <span className="fw-semibold">{convert(data.quantity * data.price)}</span>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { faBan, faEllipsisVertical, faBox, faCircleInfo, faTruck, faHandshake } 
 import DataTable from 'react-data-table-component';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { convert } from 'rupiah-format'
 
 const CustomerOrder = () => {
   const [status, setStatus] = useState('');
@@ -76,7 +77,7 @@ const CustomerOrder = () => {
     },
     {
       name: 'Price',
-      selector: (row) => row.price,
+      selector: (row) => convert(row.price),
       sortable: true,
     },
     {

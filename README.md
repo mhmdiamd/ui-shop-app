@@ -164,11 +164,9 @@ REACT_APP_ENDPOINT = [BACKEND_URL]
   </tr>
   <tr>
     <td><img width="350px" src="./documentation/seller-create-product.png"  border="0" border="0" alt="3" /> </td>
-    <td><img width="350px" src="./documentation/home-mobile.png"  border="0" border="0" alt="3" /> </td>
   </tr>
   <tr>
     <td>Seller Add Product</td>
-    <td>Home Mobile Version</td>
   </tr>
 </table>
 <!-- CONTRIBUTING -->

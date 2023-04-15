@@ -15,6 +15,7 @@ import photo5 from '../../assets/gallery/product5.png';
 import { useCreateCartMutation } from '../../features/cart/cartApi';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import {convert} from 'rupiah-format'
 
 export const ProductDetail = () => {
   const MySwal = withReactContent(Swal);
@@ -114,23 +115,23 @@ export const ProductDetail = () => {
                   </div>
                   <div className="col-12 gallery mt-3 d-flex gap-2 justify-content-center">
                     <div className={`${style.galleryItems} rounded`}>
-                      <img className="img-fluid" crossOrigin="anonymous" src={photo1} alt="" />
+                      <img className="img-fluid rounded" src={product.photo} alt="" />
                     </div>
 
                     <div className={`${style.galleryItems} rounded`}>
-                      <img className="img-fluid" crossOrigin="anonymous" src={photo2} alt="" />
+                      <img className="img-fluid rounded" src={product.photo} alt="" />
                     </div>
 
                     <div className={`${style.galleryItems} rounded`}>
-                      <img className="img-fluid" crossOrigin="anonymous" src={photo3} alt="" />
+                      <img className="img-fluid rounded" src={product.photo} alt="" />
                     </div>
 
                     <div className={`${style.galleryItems} rounded`}>
-                      <img className="img-fluid" crossOrigin="anonymous" src={photo4} alt="" />
+                      <img className="img-fluid rounded" src={product.photo} alt="" />
                     </div>
 
                     <div className={`${style.galleryItems} rounded`}>
-                      <img className="img-fluid" crossOrigin="anonymous" src={photo5} alt="" />
+                      <img className="img-fluid rounded" src={product.photo} alt="" />
                     </div>
                   </div>
                 </div>
@@ -152,7 +153,7 @@ export const ProductDetail = () => {
                   {/* <!-- Price --> */}
                   <div className="product-price mt-4">
                     <span className="descriptive-text color-trinary d-block">Price</span>
-                    <span className={`fs-3 fw-bold ${style.price}`}>Rp. {product.price}</span>
+                    <span className={`fs-3 fw-bold ${style.price}`}>{convert(product.price)}</span>
                   </div>
                   {/* <!-- End Price --> */}
 

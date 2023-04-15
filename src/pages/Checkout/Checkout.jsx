@@ -10,6 +10,7 @@ import { useCreateOrderMutation } from '../../features/order/orderApi';
 import gopayPng from '../../assets/payment/gopay.png'
 import mCardPng from '../../assets/payment/mastercard.png'
 import posPng from '../../assets/payment/pos.png'
+import {convert} from 'rupiah-format'
 
 const CheckOut = () => {
   const { data: shippingAddress, isLoading: isLoadingShippingAddress, error: errorShippingAddress } = useGetShippingAddressByIdCustomerQuery();
@@ -81,7 +82,7 @@ const CheckOut = () => {
                       <span className="color-trinary">Order</span>
                     </div>
                     <div className="col-6">
-                      <span className="fw-bold d-block text-end">Rp. {carts?.totalPrice}</span>
+                      <span className="fw-bold d-block text-end">{convert(carts?.totalPrice)}</span>
                     </div>
                   </div>
                   <div className="row mb-3">
@@ -103,7 +104,7 @@ const CheckOut = () => {
                   <span className="fw-semibold">Shopping summary</span>
                 </div>
                 <div className="col-6">
-                  <span className="fw-bold d-block text-end text-danger">Rp. {carts?.totalPrice - 5000}</span>
+                  <span className="fw-bold d-block text-end text-danger">{convert(carts?.totalPrice - 5000)}</span>
                 </div>
               </div>
               {/* <!-- Shopping Summary --> */}
@@ -205,7 +206,7 @@ const CheckOut = () => {
                           <span className="color-trinary">Order</span>
                         </div>
                         <div className="col-4">
-                          <span className="fw-bold d-block text-end">Rp. 590000</span>
+                          <span className="fw-bold d-block text-end">Rp. 590.000,00</span>
                         </div>
                       </div>
                       <div className="row">
@@ -213,7 +214,7 @@ const CheckOut = () => {
                           <span className="color-trinary">Delivery</span>
                         </div>
                         <div className="col-4">
-                          <span className="fw-bold d-block text-end">Rp. 5000</span>
+                          <span className="fw-bold d-block text-end">Rp. 5.000,00</span>
                         </div>
                       </div>
                     </div>
@@ -226,7 +227,7 @@ const CheckOut = () => {
             <div className="row px-4 pb-3 shadow">
               <div className="col-6">
                 <span className="fw-semibold d-block">Shopping summary</span>
-                <span className="fw-semibold d-block text-danger">Rp. 585000</span>
+                <span className="fw-semibold d-block text-danger">Rp. 585.000,00</span>
               </div>
               <div className="col-6 d-flex align-items-center justify-content-end">
                 <button onClick={createOrderHandler} type="button" className="btn h-75 pt-0 btn-danger w-100 rounded-pill text-light">

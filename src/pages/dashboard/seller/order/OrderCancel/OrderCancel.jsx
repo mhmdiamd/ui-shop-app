@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useGetOrderByIdSellerQuery } from '../../../../../features/order/orderApi';
 import { Dashboard } from '../../../../../components/Layout/Dashboard';
 import { DashboardCardContent } from '../../../../../components/Dashboard/DashboardCardContent';
+import { convert } from 'rupiah-format'
 
 const SellerOrderCancel = () => {
   const { data: orders, isLoading, error } = useGetOrderByIdSellerQuery({ status: 'cancel' });
@@ -57,7 +58,7 @@ const SellerOrderCancel = () => {
     },
     {
       name: 'Price',
-      selector: (row) => row.price,
+      selector: (row) => convert(row.price),
       sortable: true,
     },
     {

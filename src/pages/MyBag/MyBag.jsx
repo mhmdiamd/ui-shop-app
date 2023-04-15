@@ -4,6 +4,7 @@ import style from './style.module.css';
 import CardListCart from './../../components/CardListCart/CardListCart';
 import { useDeleteCartByIdCustomerMutation, useGetCartByIdCustomerQuery } from '../../features/cart/cartApi';
 import { Link } from 'react-router-dom';
+import { convert } from 'rupiah-format'
 
 const MyBag = () => {
   const { data: carts, isLoading, error, isError } = useGetCartByIdCustomerQuery();
@@ -72,7 +73,7 @@ const MyBag = () => {
                     <span className="color-trinary">Total price</span>
                   </div>
                   <div className="col-6">
-                    <span className="fw-bold d-block text-end">Rp. {carts?.totalPrice}</span>
+                    <span className="fw-bold d-block text-end">{convert(carts?.totalPrice)}</span>
                   </div>
                 </div>
               </div>

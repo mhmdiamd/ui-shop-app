@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDeleteProductMutation, useGetProductByIdSellerQuery } from '../../../../features/product/productApi';
 import DataTable from 'react-data-table-component';
+import { convert } from 'rupiah-format'
 
 export const MyProduct = () => {
   const { data: products, isLoading, error } = useGetProductByIdSellerQuery();
@@ -53,7 +54,7 @@ export const MyProduct = () => {
     },
     {
       name: 'Price',
-      selector: (row) => row.price,
+      selector: (row) => convert(row.price),
       sortable: true,
     },
     {

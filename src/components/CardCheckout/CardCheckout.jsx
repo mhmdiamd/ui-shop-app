@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
+import { convert } from 'rupiah-format';
 
 const CardCheckout = ({ data }) => {
   const { product_name, store_name, price, photo_product, quantity, color, size } = data;
@@ -26,7 +27,7 @@ const CardCheckout = ({ data }) => {
         </div>
 
         <div className="col-12 col-sm-5 justify-content-end d-flex align-items-center pe-5">
-          <span className="fw-semibold fs-6 text-danger">Rp. {price * quantity}</span>
+          <span className="fw-semibold fs-6 text-danger">{convert(price * quantity)}</span>
         </div>
       </div>
     </div>
