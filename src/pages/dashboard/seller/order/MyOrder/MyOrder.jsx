@@ -8,6 +8,7 @@ import { useGetOrderByIdSellerQuery, useUpdateOrderByIdMutation } from '../../..
 import { Dashboard } from '../../../../../components/Layout/Dashboard';
 import { DashboardCardContent } from '../../../../../components/Dashboard/DashboardCardContent';
 import Swal from 'sweetalert2';
+import { convert } from 'rupiah-format'
 
 const SellerOrder = () => {
   const [status, setStatus] = useState('');
@@ -77,7 +78,7 @@ const SellerOrder = () => {
     },
     {
       name: 'Price',
-      selector: (row) => row.price,
+      selector: (row) => convert(row.price),
       sortable: true,
     },
     {
