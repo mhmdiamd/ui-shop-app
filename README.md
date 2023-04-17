@@ -6,7 +6,7 @@
   <p align="center">
     <a href="https://github.com/mhmdiamd/ui-shop-app"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://ui-shop-app.vercel.app/">View Demo</a>
+    <a href="https://iam-blanja.vercel.app/">View Demo</a>
     <br />
     <a href="https://kind-blue-angelfish-boot.cyclic.app/api/v1">Api Demo</a>
   </p>
@@ -187,6 +187,6 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Frontend Blanja`](https://github.com/mhmdiamd/ui-shop-app)
 
-:rocket: [`Demo Blanja`](https://ui-shop-app.vercel.app/)
+:rocket: [`Demo Blanja`](https://iam-blanja.vercel.app/)
 
 Project Link: [https://github.com/mhmdiamd/ui-shop-app](https://github.com/mhmdiamd/ui-shop-app)
