@@ -111,7 +111,7 @@ export const ProductDetail = () => {
                 {/* <!-- Image and Gallery --> */}
                 <div className="col-12 col-md-4">
                   <div className="col-lg-12 d-flex justify-content-center">
-                    <img className="img-fluid rounded" src={product.photo} alt="" />
+                    <img className="img-fluid rounded w-100 h-100" src={product.photo} alt="" />
                   </div>
                   <div className="col-12 gallery mt-3 d-flex gap-2 justify-content-center">
                     <div className={`${style.galleryItems} rounded`}>
