@@ -106,10 +106,11 @@ REACT_APP_ENDPOINT = [BACKEND_URL]
     <td>Home</td>
   </tr>
   <tr>
+    <td><img width="350px" src="./documentation/detail-product.png"  border="0" border="0" alt="3" /> </td>
     <td><img width="350px" src="./documentation/search-result.png"  border="0" border="0" alt="3" /> </td>
-    <td><img width="350px" src="./documentation/product-base-on-category.png"  border="0" border="0" alt="4" /></td>
   </tr>
    <tr>
+    <td>Detail Product</td>
     <td>Search Result</td>
     <td>Product base on Category</td>
   </tr>
@@ -158,15 +159,17 @@ REACT_APP_ENDPOINT = [BACKEND_URL]
   </tr>
   <tr>
     <td><img width="350px" src="./documentation/filter.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="./documentation/seller-create-product.png"  border="0" border="0" alt="3" /> </td>
   </tr>
    <tr>
     <td>Filter</td>
-  </tr>
-  <tr>
-    <td><img width="350px" src="./documentation/seller-create-product.png"  border="0" border="0" alt="3" /> </td>
-  </tr>
-  <tr>
     <td>Seller Add Product</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./documentation/product-base-on-category.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+  <tr>
+    <td>product base on category</td>
   </tr>
 </table>
 <!-- CONTRIBUTING -->
