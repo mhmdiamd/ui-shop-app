@@ -26,7 +26,7 @@ export const Authentication = ({ children, title }) => {
       <div className="row">
         <div className="col-12 d-flex justify-content-center align-items-center mt-5">
           <img src={logo} alt="" />
-          <span className="text-danger fs-2 ms-2 fw-bold">Belanja</span>
+          <span className="text-danger fs-2 ms-2 fw-bold">Blanja</span>
         </div>
 
         <div className="col-12 d-flex justify-content-center">
