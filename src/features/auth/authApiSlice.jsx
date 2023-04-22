@@ -58,7 +58,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Cart'],
       transformResponse: (response, meta, args) => response,
     }),
+
+    userActivation: builder.query({
+      query: ({role, token}) => ({
+        url: `/${role}s/verification/${token}`,
+      }),
+
+      transformResponse: (response, meta, args) => response.data,
+    }),
   }),
 });
 
-export const { useSellerLoginMutation, useUserLogoutMutation, useFindMeQuery, useCustomerLoginMutation, useCustomerRegisterMutation, useSellerRegisterMutation } = authApiSlice;
+export const { useSellerLoginMutation, useUserLogoutMutation, useFindMeQuery, useCustomerLoginMutation, useCustomerRegisterMutation, useSellerRegisterMutation, useUserActivationQuery } = authApiSlice;

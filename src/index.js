@@ -31,6 +31,7 @@ import CustomerShippingAddress from './pages/dashboard/customer/address/Customer
 import CustomerOrder from './pages/dashboard/customer/order/CustomerOrder';
 import SellerOrder from './pages/dashboard/seller/order/MyOrder/MyOrder';
 import SellerOrderCancel from './pages/dashboard/seller/order/OrderCancel/OrderCancel';
+import EmailActivation from './pages/EmailActivation/EmailActivation';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -39,6 +40,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/email-activation" element={<EmailActivation />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/my-bag" element={<MyBag />} />
           <Route path="/home/checkout" element={<CheckOut />} />
